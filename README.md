@@ -1,2 +1,2 @@
 # SaucySoccer
-AP CS Winter Project
+Created by Mihir Bafna, James Kwan, Tiahm Sotudeh
