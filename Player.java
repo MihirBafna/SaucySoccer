@@ -12,7 +12,7 @@ public class Player extends GameObject{
 			setYPos(playerground);
 			setYVel(0);	
 		}
-		if(jump){
+		if(jump && getYPos() >= ground-30){
 			setYVel(-10);
 			jump = false;
 			System.out.println(getYVel());
