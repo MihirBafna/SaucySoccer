@@ -1,0 +1,160 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import javax.swing.Timer;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+
+public class Main implements ActionListener,KeyListener,MouseListener, MouseMotionListener{
+    // Main class fields
+    public int screenwidth = 1000;
+    public int screenheight = 600;
+    private JFrame screen;
+    private GameObject soccerball;
+    private Player player1;
+    private Player player2;
+    private Field field;
+    public Timer timer;
+    private int ground = 450;
+    private int minVel = 3;
+    private double friction = 0.7;    
+
+
+    //------------------------------------- Method Definitions -------------------------------------------//
+    @SuppressWarnings("unused")
+    public static void main(String[] args){
+        Main main = new Main();
+    }
+
+    public Main(){
+        screen = new JFrame();
+        field = new Field(new ImageIcon("images/field.png"));
+        soccerball = new Ball(new ImageIcon("images/SoccerBall.png"));
+        player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430);
+        player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430);
+        screen.add(soccerball.getLabel());
+        screen.add(player1.getLabel());
+        screen.add(player2.getLabel());
+        screen.add(field.getLabel());
+        screen.setSize(screenwidth, screenheight);
+        screen.setTitle("Saucy Soccer");
+        screen.setResizable(true);
+        screen.setLayout(null);
+        screen.addKeyListener(this);
+        screen.addMouseMotionListener(this);
+        timer = new Timer(17,this);
+        timer.start();
+        screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        screen.setVisible(true);
+    } 
+
+    public void update(){
+        soccerball.update();
+        this.ballEvents();
+        this.playerEvents();
+
+    }
+
+    public void ballEvents(){
+        if(soccerball.getYPos()+soccerball.getYVel()>=ground){
+            if (Math.abs((int) soccerball.getYVel()) < minVel) {
+                soccerball.setYVel(0);
+            }else{
+                soccerball.setYVel(soccerball.getYVel() * (-friction));
+            }
+            soccerball.setYPos(ground);
+        }
+
+    }
+
+    public void playerEvents(){
+        
+    }
+
+    @Override
+	public void actionPerformed(ActionEvent arg0) {
+		update();
+    }
+    
+    @Override
+	public void keyPressed(KeyEvent e) {
+        // player 2 key bindings
+        if(e.getKeyCode()==38){ //up
+            player2.changeYPos(-10);
+		}
+        if(e.getKeyCode()==40){ //down
+            player2.changeYPos(3);
+		}
+        if(e.getKeyCode()==37){ //left
+            player2.changeXPos(-3);
+		}
+		if(e.getKeyCode()==39){ //right
+            player2.changeXPos(3);
+        }
+        //player 1 key bindings
+        if (e.getKeyCode() == 87) { // up
+            player1.changeYPos(-3);
+        }
+        if (e.getKeyCode() == 83) { // down
+            player1.changeYPos(3);
+        }
+        if (e.getKeyCode() == 65) { // left
+            player1.changeXPos(-3);
+        }
+        if (e.getKeyCode() == 68) { // right
+            player1.changeXPos(3);
+        }
+		// frogboihitbox.setLocation(frogger.getX(), frogger.getY());
+		update();
+    }
+    
+    @Override
+	public void keyReleased(KeyEvent e) {
+
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+    }
+    
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		System.out.println(e.getX());
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
+	}
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent arg0) {
+
+	}
+}
