@@ -13,15 +13,15 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     // Main class fields
     public int screenwidth = 1000;
     public int screenheight = 600;
+    public Timer timer;
     private JFrame screen;
     private GameObject soccerball;
-    private Player player1;
-    private Player player2;
+    private GameObject player1;
+    private GameObject player2;
     private Field field;
-    public Timer timer;
-    private int ground = 450;
-    private int minVel = 3;
-    private double friction = 0.7;    
+    private int dy = 10;
+    private int dx = 10;
+    private int keyIs; // this variable denotes what key was pressed (1: up, 2: down, 3: left, 4: right)
 
 
     //------------------------------------- Method Definitions -------------------------------------------//
@@ -33,9 +33,9 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     public Main(){
         screen = new JFrame();
         field = new Field(new ImageIcon("images/field.png"));
-        soccerball = new Ball(new ImageIcon("images/SoccerBall.png"));
-        player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430);
-        player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430);
+        soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21/2, 50 - 21/2, 21);
+        player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430, 50);
+        player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430, 50);
         screen.add(soccerball.getLabel());
         screen.add(player1.getLabel());
         screen.add(player2.getLabel());
@@ -52,66 +52,64 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         screen.setVisible(true);
     } 
 
-    public void update(){
-        soccerball.update();
-        this.ballEvents();
-        this.playerEvents();
+    public void loop(){
+        soccerball.events();
+        player1.events();
+        player2.events();
+        soccerball.updatePos();
+        player1.updatePos();
+        player2.updatePos();
 
-    }
-
-    public void ballEvents(){
-        if(soccerball.getYPos()+soccerball.getYVel()>=ground){
-            if (Math.abs((int) soccerball.getYVel()) < minVel) {
-                soccerball.setYVel(0);
-            }else{
-                soccerball.setYVel(soccerball.getYVel() * (-friction));
-            }
-            soccerball.setYPos(ground);
-        }
-
-    }
-
-    public void playerEvents(){
-        
     }
 
     @Override
 	public void actionPerformed(ActionEvent arg0) {
-		update();
+		loop();
     }
     
     @Override
 	public void keyPressed(KeyEvent e) {
-        // player 2 key bindings
-        if(e.getKeyCode()==38){ //up
-            player2.changeYPos(-10);
-		}
-        if(e.getKeyCode()==40){ //down
-            player2.changeYPos(3);
-		}
-        if(e.getKeyCode()==37){ //left
-            player2.changeXPos(-3);
-		}
-		if(e.getKeyCode()==39){ //right
-            player2.changeXPos(3);
-        }
-        //player 1 key bindings
+        // player 1 key bindings
         if (e.getKeyCode() == 87) { // up
-            player1.changeYPos(-3);
+            player1.changeYPos(-dy);
+            keyIs = 1;
+            player1.setJump(true);
         }
         if (e.getKeyCode() == 83) { // down
-            player1.changeYPos(3);
+            player1.changeYPos(dy);
+            keyIs = 2;
         }
         if (e.getKeyCode() == 65) { // left
-            player1.changeXPos(-3);
+            player1.changeXPos(-dx);
+            keyIs = 3;
         }
         if (e.getKeyCode() == 68) { // right
-            player1.changeXPos(3);
+            player1.changeXPos(dx);
+            keyIs = 4;
         }
-		// frogboihitbox.setLocation(frogger.getX(), frogger.getY());
-		update();
+        // player 2 key bindings
+        if(e.getKeyCode()==38){ //up
+            player2.changeYPos(-dy);
+            keyIs = 1;
+            player2.setJump(true);
+		}
+        if(e.getKeyCode()==40){ //down
+            player2.changeYPos(dy);
+            keyIs = 2;
+		}
+        if(e.getKeyCode()==37){ //left
+            player2.changeXPos(-dx);
+            keyIs = 3;
+		}
+		if(e.getKeyCode()==39){ //right
+            player2.changeXPos(dx);
+            keyIs = 4;
+        }
+		loop();
     }
     
+
+    // unused override methods
     @Override
 	public void keyReleased(KeyEvent e) {
 

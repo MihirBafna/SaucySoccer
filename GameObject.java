@@ -3,29 +3,42 @@ import javax.swing.ImageIcon;
 
 public abstract class GameObject{
     protected JLabel object;
-    protected int xPos;
-    protected int yPos;
-    protected double xVel;
-    protected double yVel;
+    private int xPos;
+    private int yPos;
+    private double xVel;
+    private double yVel;
+    private int size;
     protected double dt = 0.7;
-    protected double t = 0;
     protected double g = 1.0;
+    protected int playerground = 430;
+    protected int ground = 450;
+    protected int minVel = 3;
+    protected double friction = 0.7;
+    protected boolean jump = false;
 
-    public GameObject(ImageIcon img){
+    public GameObject(ImageIcon img, int x, int y, int size){
         object = new JLabel(img);
+        this.size = size;
+        this.xPos = x;
+        this.yPos = y;
+        this.getLabel().setBounds(xPos, yPos, size, size);
     }
 
     //abstract methods
-    public abstract int getSize();
+    public abstract void updatePos();
 
-    public abstract void update();
+    public abstract void events();
 
     // getters
+    public int getSize(){
+        return this.size;
+    }
+
     public double getGravity(){
         return this.g;
     }
     
-    public double getTime(){
+    public double getDT(){
         return this.dt;
     }
     
@@ -50,6 +63,14 @@ public abstract class GameObject{
     }
 
     // Setters 
+    public void setJump(boolean x){
+        this.jump = x;
+    }
+    
+    public void setSize(int size){
+        this.size = size;
+    }
+
     public void setXPos(int x) {
         this.xPos = x;
         object.setBounds(this.xPos,this.yPos,getSize(),getSize());
@@ -78,6 +99,15 @@ public abstract class GameObject{
 
     public void setYVel(double yVel) {
         this.yVel = yVel;
+    }
+
+    public void changeXVel(double dxVel) {
+        this.xVel += dxVel;
+    }
+
+    public void changeYVel(double dyVel) {
+        this.yVel += dyVel;
+
     }
     
 }

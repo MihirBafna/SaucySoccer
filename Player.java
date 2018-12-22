@@ -1,21 +1,27 @@
 import javax.swing.ImageIcon;
 
 public class Player extends GameObject{
-	private int size = 50;
 
-	public Player(ImageIcon image, int x, int y){
-		super(image);
-		xPos = x;
-		yPos = y;
-		super.getLabel().setBounds(xPos,yPos,size,size);
+	public Player(ImageIcon image, int x, int y, int size){
+		super(image,x,y,size);
 	}
 
-	public int getSize(){
-		return this.size;
+	public void events(){
+		if(getYPos() <= playerground) changeYVel(g*dt);
+		if(getYPos() >= playerground){
+			setYPos(playerground);
+			setYVel(0);	
+		}
+		if(jump){
+			setYVel(-10);
+			jump = false;
+			System.out.println(getYVel());
+		}
+
 	}
 
-	public void update(){
-		
+	public void updatePos(){
+		changeYPos((int)(getYVel()*dt));
 	}
 
 
