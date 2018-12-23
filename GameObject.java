@@ -15,6 +15,7 @@ public abstract class GameObject{
     protected int minVel = 3;
     protected double friction = 0.7;
     protected boolean jump = false;
+    protected boolean slide = false;
 
     public GameObject(ImageIcon img, int x, int y, int size){
         object = new JLabel(img);
@@ -67,6 +68,10 @@ public abstract class GameObject{
         this.jump = x;
     }
     
+    public void setSlide(boolean x) {
+        this.slide = x;
+    }
+
     public void setSize(int size){
         this.size = size;
     }

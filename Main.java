@@ -20,9 +20,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     private GameObject player2;
     private Field field;
     private int dy = 10;
-    private int dx = 10;
-    private int keyIs; // this variable denotes what key was pressed (1: up, 2: down, 3: left, 4: right)
-
+    private int dx = 2;
 
     //------------------------------------- Method Definitions -------------------------------------------//
     @SuppressWarnings("unused")
@@ -72,38 +70,34 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         // player 1 key bindings
         if (e.getKeyCode() == 87) { // up
             player1.changeYPos(-dy);
-            keyIs = 1;
             player1.setJump(true);
         }
         if (e.getKeyCode() == 83) { // down
             player1.changeYPos(dy);
-            keyIs = 2;
         }
         if (e.getKeyCode() == 65) { // left
             player1.changeXPos(-dx);
-            keyIs = 3;
+            player1.setXVel(-10);
         }
         if (e.getKeyCode() == 68) { // right
             player1.changeXPos(dx);
-            keyIs = 4;
+            player1.setXVel(10);
         }
         // player 2 key bindings
         if(e.getKeyCode()==38){ //up
             player2.changeYPos(-dy);
-            keyIs = 1;
             player2.setJump(true);
 		}
         if(e.getKeyCode()==40){ //down
             player2.changeYPos(dy);
-            keyIs = 2;
 		}
         if(e.getKeyCode()==37){ //left
             player2.changeXPos(-dx);
-            keyIs = 3;
+            player2.setXVel(-10);
 		}
 		if(e.getKeyCode()==39){ //right
             player2.changeXPos(dx);
-            keyIs = 4;
+            player2.setXVel(10);
         }
 		loop();
     }

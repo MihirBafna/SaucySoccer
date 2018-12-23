@@ -15,13 +15,21 @@ public class Player extends GameObject{
 		if(jump && getYPos() >= ground-30){
 			setYVel(-10);
 			jump = false;
-			System.out.println(getYVel());
+		}
+		if(getXVel()>0){
+			slide = false;
+			changeXVel(-0.35);
+		}
+		if(getXVel()<0){
+			slide = false;
+			changeXVel(0.35);
 		}
 
 	}
 
 	public void updatePos(){
 		changeYPos((int)(getYVel()*dt));
+		changeXPos((int)(getXVel()*dt));
 	}
 
 
