@@ -1,5 +1,4 @@
 import javax.swing.ImageIcon;
-
 public class Player extends GameObject{
 
 	public Player(ImageIcon image, int x, int y, int size){
@@ -7,24 +6,34 @@ public class Player extends GameObject{
 	}
 
 	public void events(){
-		if(getYPos() <= playerground) changeYVel(g*dt);
-		if(getYPos() >= playerground){
+		if(getYPos() <= playerground) changeYVel(g*dt); //above the ground
+		if (getYPos() >= playerground) {				//on the ground
 			setYPos(playerground);
-			setYVel(0);	
+			setYVel(0);
 		}
-		if(jump && getYPos() >= ground-30){
+		if(getXPos() >= screenwidth - getSize()){		//past right wall
+			setXPos(screenwidth - getSize());
+		}
+		if(getXPos() <= 0){								//past left wall
+			setXPos(0);
+		}
+
+		if(jump && getYPos() >= ground-30){				//if the player is jumping
 			setYVel(-10);
 			jump = false;
 		}
-		if(getXVel()>0){
-			slide = false;
-			changeXVel(-0.35);
+		if(getXVel()>10){
+			setXVel(10);
 		}
-		if(getXVel()<0){
-			slide = false;
-			changeXVel(0.35);
+		if (getXVel() < -10) {
+			setXVel(-10);
 		}
-
+		if(getXVel()>0){								// if velocity is positive or negative direction
+			changeXVel(-0.15);							// subtracting energy loss due to friction respectively
+		}else if(getXVel()<0){
+			changeXVel(0.15);
+		}
+		
 	}
 
 	public void updatePos(){

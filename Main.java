@@ -57,7 +57,6 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         soccerball.updatePos();
         player1.updatePos();
         player2.updatePos();
-
     }
 
     @Override
@@ -77,11 +76,11 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         }
         if (e.getKeyCode() == 65) { // left
             player1.changeXPos(-dx);
-            player1.setXVel(-10);
+            player1.changeXVel(-2);
         }
         if (e.getKeyCode() == 68) { // right
             player1.changeXPos(dx);
-            player1.setXVel(10);
+            player1.changeXVel(2);
         }
         // player 2 key bindings
         if(e.getKeyCode()==38){ //up
@@ -93,11 +92,11 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 		}
         if(e.getKeyCode()==37){ //left
             player2.changeXPos(-dx);
-            player2.setXVel(-10);
+            player2.changeXVel(-2);
 		}
 		if(e.getKeyCode()==39){ //right
             player2.changeXPos(dx);
-            player2.setXVel(10);
+            player2.changeXVel(2);
         }
 		loop();
     }
@@ -121,7 +120,6 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		System.out.println(e.getX());
 	}
 
 	@Override

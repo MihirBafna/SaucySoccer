@@ -1,4 +1,3 @@
-// import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 public class Ball extends GameObject{
 

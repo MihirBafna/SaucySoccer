@@ -8,6 +8,8 @@ public abstract class GameObject{
     private double xVel;
     private double yVel;
     private int size;
+    protected int screenwidth = 1000;
+    protected int screenheight = 600;
     protected double dt = 0.7;
     protected double g = 1.0;
     protected int playerground = 430;
