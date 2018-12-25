@@ -66,7 +66,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     
     @Override
 	public void keyPressed(KeyEvent e) {
-        // player 1 key bindings
+        // player 1 key events
         if (e.getKeyCode() == 87) { // up
             player1.changeYPos(-dy);
             player1.setJump(true);
@@ -82,7 +82,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
             player1.changeXPos(dx);
             player1.changeXVel(2);
         }
-        // player 2 key bindings
+        // player 2 key events
         if(e.getKeyCode()==38){ //up
             player2.changeYPos(-dy);
             player2.setJump(true);

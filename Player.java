@@ -33,6 +33,7 @@ public class Player extends GameObject{
 		}else if(getXVel()<0){
 			changeXVel(0.15);
 		}
+		// if(player.intersects(ball))
 		
 	}
 

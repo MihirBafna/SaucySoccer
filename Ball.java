@@ -16,6 +16,7 @@ public class Ball extends GameObject{
             }
             setYPos(ground);
         }
+        // if(ball.intersects(player))
     }
 
     public void updatePos(){
