@@ -28,11 +28,6 @@ public class Player extends GameObject{
 		if (getXVel() < -10) {
 			setXVel(-10);
 		}
-		if(getXVel()>0){								// if velocity is positive or negative direction
-			changeXVel(-0.15);							// subtracting energy loss due to friction respectively
-		}else if(getXVel()<0){
-			changeXVel(0.15);
-		}
 		// if(player.intersects(ball))
 		
 	}

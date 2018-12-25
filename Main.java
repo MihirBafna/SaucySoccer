@@ -44,7 +44,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         screen.setLayout(null);
         screen.addKeyListener(this);
         screen.addMouseMotionListener(this);
-        timer = new Timer(17,this);
+        timer = new Timer(1000/60,this);
         timer.start();
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         screen.setVisible(true);
@@ -76,11 +76,11 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         }
         if (e.getKeyCode() == 65) { // left
             player1.changeXPos(-dx);
-            player1.changeXVel(-2);
+            player1.changeXVel(-10);
         }
         if (e.getKeyCode() == 68) { // right
-            player1.changeXPos(dx);
-            player1.changeXVel(2);
+            player1.setXVel(10);
+            player1.setSlide(true);
         }
         // player 2 key events
         if(e.getKeyCode()==38){ //up
@@ -91,21 +91,34 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
             player2.changeYPos(dy);
 		}
         if(e.getKeyCode()==37){ //left
-            player2.changeXPos(-dx);
-            player2.changeXVel(-2);
+            player2.setXVel(-10);
+
 		}
 		if(e.getKeyCode()==39){ //right
-            player2.changeXPos(dx);
-            player2.changeXVel(2);
+            player2.setXVel(10);
+
         }
-		loop();
     }
     
 
     // unused override methods
     @Override
 	public void keyReleased(KeyEvent e) {
+        // player 1 key events
+        if (e.getKeyCode() == 65) { // left
+            player1.setXVel(0);
 
+        }
+        if (e.getKeyCode() == 68) { // right
+            player1.setXVel(0);
+        }
+        // player 2 key events
+        if (e.getKeyCode() == 37) { // left
+            player2.setXVel(0);
+        }
+        if (e.getKeyCode() == 39) { // right
+            player2.setXVel(0);
+        }
 	}
 
 	@Override
