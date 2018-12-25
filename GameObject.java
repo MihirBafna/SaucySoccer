@@ -1,4 +1,7 @@
 import javax.swing.JLabel;
+
+import java.awt.Rectangle;
+
 import javax.swing.ImageIcon;
 
 public abstract class GameObject{
@@ -108,6 +111,10 @@ public abstract class GameObject{
     public void changeYVel(double dyVel) {
         this.yVel += dyVel;
 
+    }
+
+    public Rectangle getBounds(){
+        return new Rectangle(xPos, yPos , size, size);
     }
     
 }

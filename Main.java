@@ -19,6 +19,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     private GameObject player1;
     private GameObject player2;
     private Field field;
+    private Controller controller;
     private int dy = 10;
     private int dx = 10;
     private int keyIs; // this variable denotes what key was pressed (1: up, 2: down, 3: left, 4: right)
@@ -36,6 +37,10 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21/2, 50 - 21/2, 21);
         player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430, 50);
         player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430, 50);
+        controller = new Controller();
+        controller.addObject(player1);
+        controller.addObject(player2);
+        controller.addObject(soccerball);
         screen.add(soccerball.getLabel());
         screen.add(player1.getLabel());
         screen.add(player2.getLabel());
@@ -59,7 +64,18 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         soccerball.updatePos();
         player1.updatePos();
         player2.updatePos();
+        checkCollision();
+       
 
+    }
+
+    public void checkCollision() {
+        for(int i = 0; i < controller.gameObjects.size(); i++){
+            for(int j = 0; i < controller.gameObjects.size(); i++){
+                if(controller.gameObjects.get(i).getBounds().intersects(controller.gameObjects.get(i).getBounds()));
+                    System.out.println("collision detected");
+            }
+        }
     }
 
     @Override
