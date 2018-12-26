@@ -20,8 +20,6 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     private GameObject player2;
     private Field field;
     private int dy = 10;
-    private int dx = 2;
-
     //------------------------------------- Method Definitions -------------------------------------------//
     @SuppressWarnings("unused")
     public static void main(String[] args){
@@ -68,59 +66,51 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 	public void keyPressed(KeyEvent e) {
         // player 1 key events
         if (e.getKeyCode() == 87) { // up
-            player1.changeYPos(-dy);
             player1.setJump(true);
         }
         if (e.getKeyCode() == 83) { // down
             player1.changeYPos(dy);
         }
         if (e.getKeyCode() == 65) { // left
-            player1.changeXPos(-dx);
-            player1.changeXVel(-10);
+            player1.setLeftSlide(true);
         }
         if (e.getKeyCode() == 68) { // right
-            player1.setXVel(10);
-            player1.setSlide(true);
+            player1.setRightSlide(true);
         }
         // player 2 key events
         if(e.getKeyCode()==38){ //up
-            player2.changeYPos(-dy);
             player2.setJump(true);
 		}
         if(e.getKeyCode()==40){ //down
             player2.changeYPos(dy);
 		}
         if(e.getKeyCode()==37){ //left
-            player2.setXVel(-10);
-
+            player2.setLeftSlide(true);
 		}
 		if(e.getKeyCode()==39){ //right
-            player2.setXVel(10);
-
+            player2.setRightSlide(true);
         }
     }
     
-
-    // unused override methods
     @Override
 	public void keyReleased(KeyEvent e) {
         // player 1 key events
         if (e.getKeyCode() == 65) { // left
-            player1.setXVel(0);
-
+            player1.setLeftSlide(false);
         }
         if (e.getKeyCode() == 68) { // right
-            player1.setXVel(0);
+            player1.setRightSlide(false);
         }
         // player 2 key events
         if (e.getKeyCode() == 37) { // left
-            player2.setXVel(0);
+            player2.setLeftSlide(false);
         }
         if (e.getKeyCode() == 39) { // right
-            player2.setXVel(0);
+            player2.setRightSlide(false);
         }
 	}
 
+    // unused override methods
 	@Override
 	public void keyTyped(KeyEvent e) {
 

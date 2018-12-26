@@ -12,12 +12,14 @@ public abstract class GameObject{
     protected int screenheight = 600;
     protected double dt = 0.7;
     protected double g = 1.0;
+    protected int playerspeed = 10;
     protected int playerground = 430;
     protected int ground = 450;
     protected int minVel = 3;
     protected double friction = 0.7;
     protected boolean jump = false;
-    protected boolean slide = false;
+    protected boolean leftSlide = false;
+    protected boolean rightSlide = false;
 
     public GameObject(ImageIcon img, int x, int y, int size){
         object = new JLabel(img);
@@ -35,14 +37,6 @@ public abstract class GameObject{
     // getters
     public int getSize(){
         return this.size;
-    }
-
-    public double getGravity(){
-        return this.g;
-    }
-    
-    public double getDT(){
-        return this.dt;
     }
     
     public JLabel getLabel() {
@@ -70,8 +64,12 @@ public abstract class GameObject{
         this.jump = x;
     }
     
-    public void setSlide(boolean x) {
-        this.slide = x;
+    public void setLeftSlide(boolean x) {
+        this.leftSlide = x;
+    }
+
+    public void setRightSlide(boolean x) {
+        this.rightSlide = x;
     }
 
     public void setSize(int size){
@@ -92,6 +90,7 @@ public abstract class GameObject{
     public void changeXPos(int dx) {
         this.xPos += dx;
         object.setBounds(this.xPos, this.yPos, getSize(), getSize());
+
     }
 
     public void changeYPos(int dy) {
