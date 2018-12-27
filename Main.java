@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Main implements ActionListener,KeyListener,MouseListener, MouseMotionListener{
     // Main class fields
@@ -15,10 +16,10 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     public int screenheight = 600;
     public Timer timer;
     private JFrame screen;
+    private JLabel field;
     private GameObject soccerball;
     private GameObject player1;
     private GameObject player2;
-    private Field field;
     private int dy = 10;
     //------------------------------------- Method Definitions -------------------------------------------//
     @SuppressWarnings("unused")
@@ -28,14 +29,15 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 
     public Main(){
         screen = new JFrame();
-        field = new Field(new ImageIcon("images/field.png"));
+        field = new JLabel(new ImageIcon("images/field.png"));
+        field.setBounds(0, 0, screenwidth, screenheight);
         soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21/2, 50 - 21/2, 21);
         player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430, 50);
         player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430, 50);
         screen.add(soccerball.getLabel());
         screen.add(player1.getLabel());
         screen.add(player2.getLabel());
-        screen.add(field.getLabel());
+        screen.add(field);
         screen.setSize(screenwidth, screenheight);
         screen.setTitle("Saucy Soccer");
         screen.setResizable(true);
@@ -77,6 +79,9 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         if (e.getKeyCode() == 68) { // right
             player1.setRightSlide(true);
         }
+        if(e.getKeyCode() == 32){ //spacebar
+            player1.setKick(true);
+        }
         // player 2 key events
         if(e.getKeyCode()==38){ //up
             player2.setJump(true);
@@ -90,6 +95,9 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 		if(e.getKeyCode()==39){ //right
             player2.setRightSlide(true);
         }
+        if (e.getKeyCode() == 18) { // right alt key
+            player1.setKick(true);
+        }
     }
     
     @Override
@@ -101,12 +109,18 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         if (e.getKeyCode() == 68) { // right
             player1.setRightSlide(false);
         }
+        if (e.getKeyCode() == 32) { // spacebar
+            player1.setKick(false);
+        }
         // player 2 key events
         if (e.getKeyCode() == 37) { // left
             player2.setLeftSlide(false);
         }
         if (e.getKeyCode() == 39) { // right
             player2.setRightSlide(false);
+        }
+        if (e.getKeyCode() == 18) { // right alt key
+            player1.setKick(false);
         }
 	}
 
