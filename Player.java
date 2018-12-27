@@ -1,8 +1,10 @@
 import javax.swing.ImageIcon;
+import javafx.scene.shape.Circle;
 public class Player extends GameObject{
 
 	public Player(ImageIcon image, int x, int y, int size){
 		super(image,x,y,size);
+		pColObject = new Circle((double) x+size/2, (double) y+size/2, (double) size/2);
 	}
 
 	// events method contains a series of if statements that affect the players velocity and position //
@@ -19,7 +21,7 @@ public class Player extends GameObject{
 			setXPos(0);
 		}
 		if(jump && getYPos()>= ground - 30){			//if the player is jumping
-			setYVel(-playerspeed);
+			setYVel(-jumpspeed);
 			jump = false;
 		}
 		if(leftSlide){
@@ -30,7 +32,9 @@ public class Player extends GameObject{
 		}else{
 			setXVel(0);
 		}
-		// if(player.intersects(ball))
+		if(intersects()){
+			System.out.println("collided");
+		}
 		
 	}
 
@@ -38,7 +42,9 @@ public class Player extends GameObject{
 	public void updatePos(){
 		changeYPos((int)(getYVel()*dt));
 		changeXPos((int)(getXVel()*dt));
-
+		pColObject.setCenterX(getXPos()+getSize()/2);
+		pColObject.setCenterY(getYPos() + getSize() / 2);
+		// System.out.println(pColObject.toString());
 	}
 
 

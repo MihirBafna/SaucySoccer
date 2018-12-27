@@ -1,6 +1,7 @@
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
-
+import javafx.scene.shape.Circle;
+// import javafx.scene.shape.Rectangle;
 public abstract class GameObject{
     protected JLabel object;
     private int xPos;
@@ -8,11 +9,15 @@ public abstract class GameObject{
     private double xVel;
     private double yVel;
     private int size;
+    protected static Circle bColObject; // this circle will be used for collision detection
+    protected Circle pColObject; // this rectangle will be used for collision detection
+    protected double sumOfRadii;
     protected int screenwidth = 1000;
     protected int screenheight = 600;
     protected double dt = 0.7;
     protected double g = 1.0;
     protected int playerspeed = 10;
+    protected int jumpspeed = 15;
     protected int playerground = 430;
     protected int ground = 450;
     protected int minVel = 3;
@@ -27,6 +32,13 @@ public abstract class GameObject{
         this.xPos = x;
         this.yPos = y;
         this.getLabel().setBounds(xPos, yPos, size, size);
+    }
+
+    public boolean intersects(){ // this method determines whether or not two objects are colliding
+        double distance = Math.sqrt(Math.pow(pColObject.getCenterX() - bColObject.getCenterX(), 2)  // this calculates the distance between the centers of the two objects
+                + Math.pow(pColObject.getCenterY() - bColObject.getCenterY(),2));
+        sumOfRadii = bColObject.getRadius() + pColObject.getRadius();
+        return distance <= sumOfRadii;
     }
 
     //abstract methods
