@@ -17,6 +17,8 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     public Timer timer;
     private JFrame screen;
     private JLabel field;
+    private JLabel goal1;
+    private JLabel goal2;
     private GameObject soccerball;
     private GameObject player1;
     private GameObject player2;
@@ -30,10 +32,16 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
     public Main(){
         screen = new JFrame();
         field = new JLabel(new ImageIcon("images/field.png"));
+        goal1 = new JLabel(new ImageIcon("images/goal1.png"));
+        goal2 = new JLabel(new ImageIcon("images/goal2.png"));
+        goal1.setBounds(0, 345, 100, 125);
+        goal2.setBounds(900, 345, 100, 125);
         field.setBounds(0, 0, screenwidth, screenheight);
         soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21/2, 50 - 21/2, 21);
         player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430, 50);
         player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430, 50);
+        screen.add(goal1);
+        screen.add(goal2);
         screen.add(soccerball.getLabel());
         screen.add(player1.getLabel());
         screen.add(player2.getLabel());
