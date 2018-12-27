@@ -1,7 +1,7 @@
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
-// import javafx.scene.shape.Rectangle;
+
 public abstract class GameObject{
     protected JLabel object;
     private int xPos;
@@ -10,7 +10,7 @@ public abstract class GameObject{
     private double yVel;
     private int size;
     protected static Circle bColObject; // this circle will be used for collision detection
-    protected Circle pColObject; // this rectangle will be used for collision detection
+    protected Circle pColObject; // this circle will be used for collision detection
     protected double sumOfRadii;
     protected int screenwidth = 1000;
     protected int screenheight = 600;
@@ -25,6 +25,7 @@ public abstract class GameObject{
     protected boolean jump = false;
     protected boolean leftSlide = false;
     protected boolean rightSlide = false;
+    protected boolean kick = false;
 
     public GameObject(ImageIcon img, int x, int y, int size){
         object = new JLabel(img);
@@ -82,6 +83,10 @@ public abstract class GameObject{
 
     public void setRightSlide(boolean x) {
         this.rightSlide = x;
+    }
+
+    public void setKick(boolean x){
+        this.kick = x;
     }
 
     public void setSize(int size){
