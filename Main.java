@@ -37,9 +37,9 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         goal1.setBounds(0, 345, 100, 125);
         goal2.setBounds(900, 345, 100, 125);
         field.setBounds(0, 0, screenwidth, screenheight);
-        soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21/2, 50 - 21/2, 21);
-        player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430, 50);
-        player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430, 50);
+        soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21/2, 50 - 21/2, 21, "ball");
+        player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430, 50, "player1");
+        player2 = new Player(new ImageIcon("images/SoccerBallBig.png"),900, 430, 50, "player2");
         screen.add(goal1);
         screen.add(goal2);
         screen.add(soccerball.getLabel());
@@ -50,13 +50,19 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         screen.setTitle("Saucy Soccer");
         screen.setResizable(true);
         screen.setLayout(null);
+        soccerball.init();
+        player1.init();
+        player2.init();
         screen.addKeyListener(this);
         screen.addMouseMotionListener(this);
         timer = new Timer(1000/60,this);
         timer.start();
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         screen.setVisible(true);
+
     } 
+
+
 
     public void loop(){
         soccerball.events();

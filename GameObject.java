@@ -1,17 +1,19 @@
 import javax.swing.JLabel;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
 
 public abstract class GameObject{
-    protected JLabel object;
-    private int xPos;
-    private int yPos;
+    private JLabel object;
     private double xVel;
     private double yVel;
+    private int xPos;
+    private int yPos;
     private int size;
-    protected static Circle bColObject; // this circle will be used for collision detection
-    protected Circle pColObject; // this circle will be used for collision detection
+    protected static HashMap<String,GameObject> gameObjects = new HashMap<String,GameObject>(3);
+    protected Circle collisionArea; // this circle will be used for collision detection
     protected double sumOfRadii;
+    protected String id;
     protected int screenwidth = 1000;
     protected int screenheight = 600;
     protected double dt = 0.7;
@@ -27,18 +29,19 @@ public abstract class GameObject{
     protected boolean rightSlide = false;
     protected boolean kick = false;
 
-    public GameObject(ImageIcon img, int x, int y, int size){
-        object = new JLabel(img);
+    public GameObject(ImageIcon img, int x, int y, int size, String key){
+        this.object = new JLabel(img);
         this.size = size;
         this.xPos = x;
         this.yPos = y;
+        this.id = key;
         this.getLabel().setBounds(xPos, yPos, size, size);
     }
 
-    public boolean intersects(){ // this method determines whether or not two objects are colliding
-        double distance = Math.sqrt(Math.pow(pColObject.getCenterX() - bColObject.getCenterX(), 2)  // this calculates the distance between the centers of the two objects
-                + Math.pow(pColObject.getCenterY() - bColObject.getCenterY(),2));
-        sumOfRadii = bColObject.getRadius() + pColObject.getRadius();
+    public boolean isCollision(Circle A, Circle B){ // this method determines whether or not two objects are colliding
+        double distance = Math.sqrt(Math.pow(A.getCenterX() - B.getCenterX(), 2)  // this calculates the distance between the centers of the two objects
+                + Math.pow(A.getCenterY() - B.getCenterY(),2));
+        sumOfRadii = A.getRadius() + B.getRadius();
         return distance <= sumOfRadii;
     }
 
@@ -46,6 +49,9 @@ public abstract class GameObject{
     public abstract void updatePos();
 
     public abstract void events();
+
+    public abstract void init();
+
 
     // getters
     public int getSize(){

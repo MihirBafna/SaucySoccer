@@ -2,9 +2,14 @@ import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
 public class Player extends GameObject{
 
-	public Player(ImageIcon image, int x, int y, int size){
-		super(image,x,y,size);
-		pColObject = new Circle((double) x+size/2, (double) y+size/2, (double) size/2);
+	public Player(ImageIcon image, int x, int y, int size, String key){
+		super(image,x,y,size, key);
+	}
+
+	public void init() {
+		gameObjects.put(id, this);
+		gameObjects.get(id).collisionArea = new Circle((double) getXPos() + getSize() / 2,
+				(double) getYPos() + getSize() / 2, (double) getSize() / 2);
 	}
 
 	// events method contains a series of if statements that affect the players velocity and position //
@@ -32,19 +37,23 @@ public class Player extends GameObject{
 		}else{
 			setXVel(0);
 		}
-		if(intersects()){
-			System.out.println("collided");
+		if(isCollision(gameObjects.get("player1").collisionArea,gameObjects.get("ball").collisionArea)){
+			System.out.println("collided1");
 		}
-		
+		if (isCollision(gameObjects.get("player2").collisionArea, gameObjects.get("ball").collisionArea)) {
+			System.out.println("collided2");
+		}		
+		if (isCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {
+			System.out.println("collided3");
+		}
 	}
 
 	// updatePos method updates the position of the player based on changes made to the x and y velocities // 
 	public void updatePos(){
 		changeYPos((int)(getYVel()*dt));
 		changeXPos((int)(getXVel()*dt));
-		pColObject.setCenterX(getXPos()+getSize()/2);
-		pColObject.setCenterY(getYPos() + getSize() / 2);
-		// System.out.println(pColObject.toString());
+		gameObjects.get(id).collisionArea.setCenterX(getXPos()+getSize()/2);
+		gameObjects.get(id).collisionArea.setCenterY(getYPos()+getSize()/2);
 	}
 
 
