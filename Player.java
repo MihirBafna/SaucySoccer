@@ -38,13 +38,10 @@ public class Player extends GameObject{
 			setXVel(0);
 		}
 		if(isCollision(gameObjects.get("player1").collisionArea,gameObjects.get("ball").collisionArea)){
-			System.out.println("collided1");
 		}
 		if (isCollision(gameObjects.get("player2").collisionArea, gameObjects.get("ball").collisionArea)) {
-			System.out.println("collided2");
 		}		
 		if (isCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {
-			System.out.println("collided3");
 		}
 	}
 

@@ -13,6 +13,10 @@ public class Ball extends GameObject{
     }
 
     public void events(){
+        Circle ball = gameObjects.get("ball").collisionArea;
+        Circle player1 = gameObjects.get("player1").collisionArea;
+        Circle player2 = gameObjects.get("player2").collisionArea;
+
         if (getYPos() <= ground) changeYVel(g*dt);
         if (getYPos() + getYVel() >= ground) {
             if (Math.abs((int) getYVel()) < minVel) {
@@ -22,11 +26,36 @@ public class Ball extends GameObject{
             }
             setYPos(ground);
         }
-
+        // if(getYPos()<= ground && Math.abs(getXVel())>0){
+        //     setXVel(friction*getXVel());
+        // }
+        if (getXPos() >= screenwidth - getSize()) {
+            setXPos(screenwidth-getSize());
+            setXVel(-getXVel());
+        }
+        if(getXPos() <= 0){
+            setXPos(0);
+            setXVel(-getXVel());
+        }
+        if (isCollision(ball, player1)) {
+            if(player1.getCenterX()<= ball.getCenterX()){
+                setXVel(10);
+            }else if(player1.getCenterX()>=ball.getCenterX()){
+                setXVel(-10);
+            }
+        }
+        if (isCollision(ball, player2)) {
+            if(player2.getCenterX()<=ball.getCenterX()){
+                setXVel(10);
+            }else if(player2.getCenterX()>=ball.getCenterX()){
+                setXVel(-10);
+            }
+        }
     }
 
     public void updatePos(){
         changeYPos((int)(getYVel()*dt));
+        changeXPos((int)(getXVel()*dt));
         gameObjects.get(id).collisionArea.setCenterX(getXPos() + getSize() / 2);
         gameObjects.get(id).collisionArea.setCenterY(getYPos()+getSize()/2);
     }
