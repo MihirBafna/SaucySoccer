@@ -22,13 +22,15 @@ public class Ball extends GameObject{
             if (Math.abs((int) getYVel()) < minVel) {
                 setYVel(0);
             } else {
-                setYVel((getYVel() * (-friction)));
+                setYVel((getYVel() * (-bouncefriction)));
             }
             setYPos(ground);
         }
-        // if(getYPos()<= ground && Math.abs(getXVel())>0){
-        //     setXVel(friction*getXVel());
-        // }
+        if(getYPos()<= ground && getXVel()>0){
+            setXVel(getXVel()-slidefriction);
+        }else if(getYPos()<= ground && getXVel()<0){
+            setXVel(getXVel()+slidefriction);
+        }
         if (getXPos() >= screenwidth - getSize()) {
             setXPos(screenwidth-getSize());
             setXVel(-getXVel());

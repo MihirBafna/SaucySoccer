@@ -23,7 +23,8 @@ public abstract class GameObject{
     protected int playerground = 430;
     protected int ground = 450;
     protected int minVel = 3;
-    protected double friction = 0.7;
+    protected double bouncefriction = 0.7;
+    protected double slidefriction = 0.2;
     protected boolean jump = false;
     protected boolean leftSlide = false;
     protected boolean rightSlide = false;
