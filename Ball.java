@@ -45,12 +45,18 @@ public class Ball extends GameObject{
             }else if(player1.getCenterX()>=ball.getCenterX()){
                 setXVel(-10);
             }
+            if (gameObjects.get("player1").kick) {
+                setYVel(-10);
+            }
         }
         if (isCollision(ball, player2)) {
             if(player2.getCenterX()<=ball.getCenterX()){
                 setXVel(10);
             }else if(player2.getCenterX()>=ball.getCenterX()){
                 setXVel(-10);
+            }
+            if(gameObjects.get("player2").kick){
+                setYVel(-10);
             }
         }
     }

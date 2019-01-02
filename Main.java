@@ -110,7 +110,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
             player2.setRightSlide(true);
         }
         if (e.getKeyCode() == 18) { // right alt key
-            player1.setKick(true);
+            player2.setKick(true);
         }
     }
     
@@ -134,7 +134,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
             player2.setRightSlide(false);
         }
         if (e.getKeyCode() == 18) { // right alt key
-            player1.setKick(false);
+            player2.setKick(false);
         }
 	}
 
