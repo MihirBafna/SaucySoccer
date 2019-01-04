@@ -26,9 +26,9 @@ public class Ball extends GameObject{
             }
             setYPos(ground);
         }
-        if(getYPos()>= ground && getXVel()>0){
+        if(getYPos()<= ground && getXVel()>0){
             setXVel(getXVel()-slidefriction);
-        }else if(getYPos()>= ground && getXVel()<0){
+        }else if(getYPos()<= ground && getXVel()<0){
             setXVel(getXVel()+slidefriction);
         }
         if (getXPos() >= screenwidth - getSize()) {
