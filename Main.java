@@ -61,10 +61,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         screen.setVisible(true);
         SoundEffect music = new SoundEffect("music/ahem_x.wav");
         music.play();
-
     } 
-
-
 
     public void loop(){
         soccerball.events();
@@ -79,7 +76,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 	public void actionPerformed(ActionEvent arg0) {
 		loop();
     }
-
+    
     @Override
 	public void keyPressed(KeyEvent e) {
         // player 1 key events
@@ -115,7 +112,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
             player2.setKick(true);
         }
     }
-
+    
     @Override
 	public void keyReleased(KeyEvent e) {
         // player 1 key events
@@ -150,7 +147,7 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 	public void mouseClicked(MouseEvent e) {
 
     }
-
+    
 	@Override
 	public void mouseEntered(MouseEvent e) {
 	}
