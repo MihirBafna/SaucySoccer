@@ -4,8 +4,7 @@ import javax.sound.sampled.*;
   
 public class SoundEffect {
 	private Clip clip;
-	 private static final SoundEffect jump = new SoundEffect("jump.wav");
-	 private static final SoundEffect kick = new SoundEffect("kick.wav");
+	
 	  public static enum Volume {
 	   	   MUTE, LOW, MEDIUM, HIGH
 	   }
@@ -37,6 +36,7 @@ public class SoundEffect {
 	      
 	 	}
 }
+
 
 	
 
