@@ -1,14 +1,17 @@
 import java.io.*;
 import java.net.URL;
 import javax.sound.sampled.*;
-  
+
 public class SoundEffect {
+
 	private Clip clip;
-	//private static final SoundEffect jump = new SoundEffect("jump.wav");
-	//private static final SoundEffect kick = new SoundEffect("kick.wav");
+
+	public static final SoundEffect test = new SoundEffect("music/ahem_x.wav");
+
 	public static enum Volume {
 		MUTE, LOW, MEDIUM, HIGH
 	}
+
 	public static Volume volume = Volume.LOW;
 
 	SoundEffect(String soundFileName) {
@@ -30,24 +33,15 @@ public class SoundEffect {
 			e.printStackTrace();
 		}
 	}
+
 	public void play() {
-	    if (volume != Volume.MUTE) {
-	        if (clip.isRunning())
-	        clip.stop();   // Stop the player if it is still running
-	        clip.setFramePosition(0); // Rewind to the beginning
-	        clip.start();     // Start playing
-	    }
-	      
+		if (volume != Volume.MUTE) {
+			if (clip.isRunning()) {
+				clip.stop(); // Stop the player if it is still running
+			}
+			clip.setFramePosition(0); // Rewind to the beginning
+			clip.start(); // Start playing
+		}
+
 	}
 }
-
-	
-
-
-	 
-	
-	   
-
-  
-
-
