@@ -59,6 +59,8 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
         timer.start();
         screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         screen.setVisible(true);
+        SoundEffect music = new SoundEffect("music/ahem_x.wav");
+        music.play();
 
     } 
 
