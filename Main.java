@@ -180,3 +180,4 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 	public void mouseMoved(MouseEvent arg0) {
 
 	}
+}
