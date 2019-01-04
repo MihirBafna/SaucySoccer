@@ -62,8 +62,6 @@ public class Main implements ActionListener,KeyListener,MouseListener, MouseMoti
 
     } 
 
-
-
     public void loop(){
         soccerball.events();
         player1.events();
