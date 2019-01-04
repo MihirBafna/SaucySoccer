@@ -20,11 +20,11 @@ public abstract class GameObject{
     protected double g = 1.0;
     protected int playerspeed = 10;
     protected int jumpspeed = 15;
-    protected int playerground = 430;
+    protected int playerground = 410;
     protected int ground = 450;
     protected int minVel = 3;
     protected double bouncefriction = 0.7;
-    protected double slidefriction = 0.2;
+    protected double slidefriction = 0.5;
     protected boolean jump = false;
     protected boolean leftSlide = false;
     protected boolean rightSlide = false;

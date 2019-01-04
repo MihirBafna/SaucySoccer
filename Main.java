@@ -40,8 +40,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		field.setBounds(0, 0, screenwidth, screenheight);
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
 				"ball");
-		player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 430, 50, "player1");
-		player2 = new Player(new ImageIcon("images/SoccerBallBig.png"), 900, 430, 50, "player2");
+		player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 410, 50, "player1");
+		player2 = new Player(new ImageIcon("images/SoccerBallBig.png"), 900, 410, 50, "player2");
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
