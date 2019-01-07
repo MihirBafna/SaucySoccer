@@ -22,7 +22,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject soccerball;
 	private GameObject player1;
 	private GameObject player2;
-	private int dy = 10;
 
 	// ------------------------------------- Method Definitions -------------------------------------------//
 	@SuppressWarnings("unused")
@@ -40,8 +39,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		field.setBounds(0, 0, screenwidth, screenheight);
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
 				"ball");
-		player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 410, 50, "player1");
-		player2 = new Player(new ImageIcon("images/SoccerBallBig.png"), 900, 410, 50, "player2");
+		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
+		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
+		// soccerball = new Ball(new BufferedImage("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
+		// 		"ball");
+		// player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 420, 50, "player1");
+		// player2 = new Player(new ImageIcon("images/SoccerBallBig.png"), 900, 420, 50, "player2");
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
@@ -61,7 +64,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		timer.start();
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
-		SoundEffect.test.play();
 	}
 
 	public void loop() {
@@ -85,7 +87,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			player1.setJump(true);
 		}
 		if (e.getKeyCode() == 83) { // down
-			player1.changeYPos(dy);
 		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(true);
@@ -101,7 +102,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			player2.setJump(true);
 		}
 		if (e.getKeyCode() == 40) { // down
-			player2.changeYPos(dy);
 		}
 		if (e.getKeyCode() == 37) { // left
 			player2.setLeftSlide(true);
