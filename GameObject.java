@@ -30,6 +30,7 @@ public abstract class GameObject{
     protected static final int minVel = 3;
     protected static final double bouncefriction = 0.7;
     protected static final double slidefriction = 0.5;
+    protected static int rotations = 0;
     // protected fields //
     protected static HashMap<String,GameObject> gameObjects = new HashMap<String,GameObject>(3);
     protected Circle collisionArea; // this circle will be used for collision detection
@@ -58,14 +59,20 @@ public abstract class GameObject{
     }
 
     public void rotate(double theta){
+    	rotations++;
+    	this.img = img;
         BufferedImage buffer = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = (Graphics2D)buffer.getGraphics();
-        g2d.rotate(Math.PI/180*theta, size/2, size/2);
+        g2d.rotate(Math.PI/180*theta*rotations, size/2, size/2);
         g2d.drawImage(img.getImage(), 0, 0, null);
-        this.img = new ImageIcon(buffer);
-        object.setIcon(img);
+//        this.img = new ImageIcon(buffer);
+        object.setIcon(new ImageIcon(buffer));
     }
 
+    public int getRotations() {
+    	return this.rotations;
+    }
+    
     //abstract methods
     public abstract void updatePos();
 
