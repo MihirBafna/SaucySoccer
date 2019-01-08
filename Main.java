@@ -40,7 +40,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
-    weapon1 = new Weapon(new ImageIcon("images/TrainingStick.png"), 50 , 420, 50, "weapon1", player1);
+    	weapon1 = new Weapon(new ImageIcon("images/TrainingStick.png"), 50 , 420, 50, "weapon1",1);
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
