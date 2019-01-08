@@ -6,7 +6,7 @@ public class SoundEffect {
 
 	private Clip clip;
 
-	public static final SoundEffect test = new SoundEffect("music/ahem_x.wav");
+	public static final SoundEffect test = new SoundEffect("music/synthygamebeat.wav");
 
 	public static enum Volume {
 		MUTE, LOW, MEDIUM, HIGH

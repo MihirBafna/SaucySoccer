@@ -37,15 +37,10 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		goal1.setBounds(0, 345, 100, 125);
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
-		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
-				"ball");
+		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
     weapon1 = new Weapon(new ImageIcon("images/TrainingStick.png"), 50 , 420, 50, "weapon1", player1);
-		// soccerball = new Ball(new BufferedImage("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
-		// 		"ball");
-		// player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 420, 50, "player1");
-		// player2 = new Player(new ImageIcon("images/SoccerBallBig.png"), 900, 420, 50, "player2");
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
@@ -67,6 +62,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		timer.start();
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
+		SoundEffect.test.play();
 	}
 
 	public void loop() {
