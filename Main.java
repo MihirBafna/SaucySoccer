@@ -1,4 +1,3 @@
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,11 +39,19 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	public Main() {
 		screen = new JFrame();
 		field = new JLabel(new ImageIcon("images/field.png"));
-		goal1 = new JLabel(new ImageIcon("images/goal1.png"));
+		goal1 = new JLabel(new ImageIcon("images/goal1.png")); 
 		goal2 = new JLabel(new ImageIcon("images/goal2.png"));
+		scoreDisplay = new JLabel("");
+		powerDisplay1 = new JLabel("");
+		powerDisplay2 = new JLabel("");
 		goal1.setBounds(0, 345, 100, 125);
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
+		scoreDisplay.setBounds(500, 50, 50, 50);
+    powerDisplay1.setBounds(200, 50, 100, 100);
+	  powerDisplay2.setBounds(800, 50, 100, 100);
+    powerDisplay1.setFont(new Font("Courier New", Font.BOLD, 30));
+	  powerDisplay2.setFont(new Font("Courier New", Font.BOLD, 30));
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
@@ -55,21 +62,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.add(player1.getLabel());
 		screen.add(player2.getLabel());
 		screen.add(weapon1.getLabel());
-		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
-		p1power = "Power = " + Integer.toString(((Player) player1).getPowerLevel());
-		p2power = "Power = " + Integer.toString(((Player) player2).getPowerLevel());
-		scoreDisplay = new JLabel(scores);
-		powerDisplay1 = new JLabel(p1power);
-		powerDisplay2 = new JLabel(p2power);
-		Dimension scoreDisplay_size = scoreDisplay.getPreferredSize();
-	    scoreDisplay.setBounds(500, 50, scoreDisplay_size.width, scoreDisplay_size.height);
-	    powerDisplay1.setBounds(200, 50, 100, 100);
-	    powerDisplay2.setBounds(800, 50, 100, 100);
-	    powerDisplay1.setFont(new Font("Courier New", Font.BOLD, 30));
-	    powerDisplay2.setFont(new Font("Courier New", Font.BOLD, 30));
 		screen.add(powerDisplay1);
 		screen.add(powerDisplay2);
-	    screen.add(scoreDisplay);
+	  screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
 		screen.setTitle("Saucy Soccer");
@@ -79,6 +74,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.init();
 		player2.init();
 		weapon1.init();
+		displayScores();
 		screen.addKeyListener(this);
 		screen.addMouseMotionListener(this);
 		timer = new Timer(1000 / 60, this);
@@ -96,26 +92,23 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.updatePos();
 		player2.updatePos();
 		weapon1.updatePos();
-		if(soccerball.getXPos() >= 900 && soccerball.getXPos() <= 960 && soccerball.getYPos() >= 323) {
-	        ((Player) player1).addScore();
-	        soccerball.resetPosition();
-			soccerball.setXVel(0);
-			soccerball.setYVel(0);
-	        player1.resetPosition();
-		}
-		if(soccerball.getXPos() <= 100 && soccerball.getXPos() >= 0 && soccerball.getYPos() >= 323) {
-			((Player) player2).addScore();
-			soccerball.resetPosition();
-			soccerball.setXVel(0);
-			soccerball.setYVel(0);
-			player1.resetPosition();
-		}
+		displayScores();
+
+	}
+
+	public boolean won(){
+		return true;
+	}
+
+	public void displayScores(){
 		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
 		p1power = Integer.toString(((Player) player1).getPowerLevel());
 		p2power = Integer.toString(((Player) player2).getPowerLevel());
-        scoreDisplay.setText(scores);
-        powerDisplay1.setText(p1power);
-        powerDisplay2.setText(p2power);
+    scoreDisplay.setText(scores);
+    powerDisplay1.setText(p1power);
+    powerDisplay2.setText(p2power);
+		scoreDisplay.setText(scores);
+
 	}
 
 	@Override
@@ -152,7 +145,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		if (e.getKeyCode() == 39) { // right
 			player2.setRightSlide(true);
 		}
-		if (e.getKeyCode() == 17) { // right alt key
+		if (e.getKeyCode() == 18) { // right alt key
 			player2.setKick(true);
 		}
 	}

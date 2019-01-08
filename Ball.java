@@ -3,6 +3,9 @@ import javafx.scene.shape.Circle;
 
 public class Ball extends GameObject{
     private static int rotatecounter;
+    private Circle ball;
+    private Circle player1;
+    private Circle player2;
 
     public Ball(ImageIcon img, int x, int y, int size, String key){
         super(img,x,y,size,key);
@@ -15,9 +18,9 @@ public class Ball extends GameObject{
     }
 
     public void events(){
-        Circle ball = gameObjects.get("ball").collisionArea;
-        Circle player1 = gameObjects.get("player1").collisionArea;
-        Circle player2 = gameObjects.get("player2").collisionArea;
+        ball = gameObjects.get("ball").collisionArea;
+        player1 = gameObjects.get("player1").collisionArea;
+        player2 = gameObjects.get("player2").collisionArea;
         rotatecounter = (rotatecounter+1)%3;
         if(rotatecounter == 0){
             if (getXVel()<0) {
@@ -62,7 +65,7 @@ public class Ball extends GameObject{
                 setXVel(-10);
             }
             if (gameObjects.get("player1").kick) {
-                setYVel(-15);
+                setYVel(-12);
             }
         }
         if (isCollision(ball, player2)) {
@@ -72,7 +75,7 @@ public class Ball extends GameObject{
                 setXVel(-10);
             }
             if(gameObjects.get("player2").kick){
-                setYVel(-15);
+                setYVel(-12);
             }
         }
     }
@@ -83,10 +86,4 @@ public class Ball extends GameObject{
         gameObjects.get(id).collisionArea.setCenterX(getXPos() + getSize() / 2);
         gameObjects.get(id).collisionArea.setCenterY(getYPos()+getSize()/2);
     }
-
-	@Override
-	public void resetPosition() {
-		
-	}
-
 }
