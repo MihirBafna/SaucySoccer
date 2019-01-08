@@ -81,22 +81,17 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.updatePos();
 		player2.updatePos();
 		weapon1.updatePos();
-		if(soccerball.getXPos() >= 900 && soccerball.getXPos() <= 960 && soccerball.getYPos() >= 323) {
-	        ((Player) player1).addScore();
-	        soccerball.resetPosition();
-			soccerball.setXVel(0);
-			soccerball.setYVel(0);
-	        player1.resetPosition();
-		}
-		if(soccerball.getXPos() <= 100 && soccerball.getXPos() >= 0 && soccerball.getYPos() >= 323) {
-			((Player) player2).addScore();
-			soccerball.resetPosition();
-			soccerball.setXVel(0);
-			soccerball.setYVel(0);
-			player1.resetPosition();
-		}
+		displayScores();
+
+	}
+
+	public boolean won(){
+		return true;
+	}
+
+	public void displayScores(){
 		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
-        scoreDisplay.setText(scores);
+		scoreDisplay.setText(scores);
 	}
 
 	@Override

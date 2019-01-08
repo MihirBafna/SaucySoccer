@@ -66,6 +66,17 @@ public abstract class GameObject{
         g2d.drawImage(img.getImage(), 0, 0, null);
         object.setIcon(new ImageIcon(buffer));
     }
+
+    public void resetPosition() {
+        gameObjects.get("ball").setXPos(500);
+        gameObjects.get("ball").setYPos(50);
+        gameObjects.get("ball").setXVel(0);
+        gameObjects.get("ball").setYVel(0);
+        gameObjects.get("player1").setXPos(200);
+        gameObjects.get("player1").setYPos(playerground);
+        gameObjects.get("player2").setXPos(800);
+        gameObjects.get("player2").setYPos(playerground);
+    }
     
     //abstract methods
     public abstract void updatePos();
@@ -73,8 +84,6 @@ public abstract class GameObject{
     public abstract void events();
 
     public abstract void init();
-
-    public abstract void resetPosition();
     
     // getters
     public int getSize(){
