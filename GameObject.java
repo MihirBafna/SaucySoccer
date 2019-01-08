@@ -1,4 +1,5 @@
 import javax.swing.JLabel;
+import com.sun.javafx.geom.Rectangle;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
@@ -51,11 +52,16 @@ public abstract class GameObject{
         this.getLabel().setBounds(xPos, yPos, size, size);
     }
 
-    public boolean isCollision(Circle A, Circle B){ // this method determines whether or not two objects are colliding
+    public boolean isCircleCollision(Circle A, Circle B){ // this method determines whether or not two objects are colliding
         double distance = Math.sqrt(Math.pow(A.getCenterX() - B.getCenterX(), 2)  // this calculates the distance between the centers of the two objects
                 + Math.pow(A.getCenterY() - B.getCenterY(),2));
         sumOfRadii = A.getRadius() + B.getRadius();
         return distance <= sumOfRadii;
+    }
+
+
+    public boolean rectangleCircleCollision(Circle A, Rectangle B) {
+        return B.contains((int)A.getCenterX(), (int)A.getCenterY());
     }
 
     public void rotate(double theta){

@@ -49,9 +49,4 @@ public class Weapon extends GameObject{
 			attached = gameObjects.get("player2");
 		}
 	}
-
-	public void resetPosition() {
-		
-	}
-
 }
