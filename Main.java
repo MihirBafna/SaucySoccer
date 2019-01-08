@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -19,6 +20,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private JLabel field;
 	private JLabel goal1;
 	private JLabel goal2;
+	private JLabel scoreDisplay;
+	private String scores;
 	private GameObject soccerball;
 	private GameObject player1;
 	private GameObject player2;
@@ -47,6 +50,11 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.add(player1.getLabel());
 		screen.add(player2.getLabel());
 		screen.add(weapon1.getLabel());
+		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
+		scoreDisplay = new JLabel(scores);
+		Dimension size = scoreDisplay.getPreferredSize();
+	    scoreDisplay.setBounds(500, 50, size.width, size.height);
+	    screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
 		screen.setTitle("Saucy Soccer");
@@ -73,6 +81,22 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.updatePos();
 		player2.updatePos();
 		weapon1.updatePos();
+		if(soccerball.getXPos() >= 900 && soccerball.getXPos() <= 960 && soccerball.getYPos() >= 323) {
+	        ((Player) player1).addScore();
+	        soccerball.resetPosition();
+			soccerball.setXVel(0);
+			soccerball.setYVel(0);
+	        player1.resetPosition();
+		}
+		if(soccerball.getXPos() <= 100 && soccerball.getXPos() >= 0 && soccerball.getYPos() >= 323) {
+			((Player) player2).addScore();
+			soccerball.resetPosition();
+			soccerball.setXVel(0);
+			soccerball.setYVel(0);
+			player1.resetPosition();
+		}
+		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
+        scoreDisplay.setText(scores);
 	}
 
 	@Override
@@ -109,7 +133,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		if (e.getKeyCode() == 39) { // right
 			player2.setRightSlide(true);
 		}
-		if (e.getKeyCode() == 18) { // right alt key
+		if (e.getKeyCode() == 17) { // right alt key
 			player2.setKick(true);
 		}
 	}
