@@ -2,6 +2,8 @@ import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
 public class Player extends GameObject{
 
+	private int score;
+	
 	public Player(ImageIcon image, int x, int y, int size, String key){
 		super(image,x,y,size, key);
 	}
@@ -50,6 +52,22 @@ public class Player extends GameObject{
 		changeXPos((int)(getXVel()*dt));
 		gameObjects.get(id).collisionArea.setCenterX(getXPos()+getSize()/2);
 		gameObjects.get(id).collisionArea.setCenterY(getYPos()+getSize()/2);
+	}
+	public int getScore() {
+		return this.score;
+	}
+	public void addScore() {
+		this.score++;
+	}
+	public void resetScore() {
+		this.score = 0;
+	}
+	public void resetPosition() {
+		gameObjects.get("player1").setXPos(200);
+		gameObjects.get("player1").setYPos(playerground);
+		gameObjects.get("player2").setXPos(800);
+		gameObjects.get("player2").setYPos(playerground);
+
 	}
 
 
