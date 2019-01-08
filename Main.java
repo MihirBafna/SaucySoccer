@@ -41,10 +41,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 				"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
-		// soccerball = new Ball(new BufferedImage("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
-		// 		"ball");
-		// player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 420, 50, "player1");
-		// player2 = new Player(new ImageIcon("images/SoccerBallBig.png"), 900, 420, 50, "player2");
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
@@ -146,7 +142,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-
 	}
 
 	@Override
@@ -160,7 +155,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-
 	}
 
 	@Override
@@ -175,6 +169,5 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	@Override
 	public void mouseMoved(MouseEvent arg0) {
-
 	}
 }

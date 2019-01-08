@@ -2,6 +2,8 @@ import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
 
 public class Ball extends GameObject{
+    private static int rotatecounter;
+
     public Ball(ImageIcon img, int x, int y, int size, String key){
         super(img,x,y,size,key);
     }
@@ -16,8 +18,11 @@ public class Ball extends GameObject{
         Circle ball = gameObjects.get("ball").collisionArea;
         Circle player1 = gameObjects.get("player1").collisionArea;
         Circle player2 = gameObjects.get("player2").collisionArea;
-
-        if (getYPos() <= ground) changeYVel(g*dt);
+        rotatecounter = (rotatecounter+1)%10;
+        if(rotatecounter == 0){
+            rotate(8.0);
+        }
+        if (getYPos() <= ground) changeYVel(gravity*dt);
         if (getYPos() + getYVel() >= ground) {
             if (Math.abs((int) getYVel()) < minVel) {
                 setYVel(0);
@@ -39,6 +44,12 @@ public class Ball extends GameObject{
             setXPos(0);
             setXVel(-getXVel());
         }
+        if(getXPos() >= 900 && getXPos() <= 960 && getYPos() >= 323){
+        }else if(getXPos() >= 885 && getYPos() <= 325 && getYPos() >= 320){
+            setYVel(-getYVel());
+        }else if (getXPos() >= 885 && getYPos() <= 330 && getYPos() >= 325) {
+            setYVel(-getYVel());
+        }
         if (isCollision(ball, player1)) {
             if(player1.getCenterX()<= ball.getCenterX()){
                 setXVel(10);
@@ -46,7 +57,7 @@ public class Ball extends GameObject{
                 setXVel(-10);
             }
             if (gameObjects.get("player1").kick) {
-                setYVel(-10);
+                setYVel(-15);
             }
         }
         if (isCollision(ball, player2)) {
@@ -56,7 +67,7 @@ public class Ball extends GameObject{
                 setXVel(-10);
             }
             if(gameObjects.get("player2").kick){
-                setYVel(-10);
+                setYVel(-15);
             }
         }
     }

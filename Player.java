@@ -14,7 +14,7 @@ public class Player extends GameObject{
 
 	// events method contains a series of if statements that affect the players velocity and position //
 	public void events(){
-		if(getYPos() <= playerground) changeYVel(g*dt); //above the ground
+		if(getYPos() <= playerground) changeYVel(gravity*dt); //above the ground
 		if (getYPos() >= playerground) {				//on the ground
 			setYPos(playerground);
 			setYVel(0);
@@ -29,11 +29,23 @@ public class Player extends GameObject{
 			setYVel(-jumpspeed);
 			jump = false;
 		}
-		if(leftSlide){
-			setXVel(-playerspeed);
-		}
-		else if(rightSlide) {
-			setXVel(playerspeed);
+		// if(leftSlide){
+		// 	if(Math.abs(getXVel())<=playerMaxSpeed){
+		// 		setXVel(-playerStartSpeed*1.1);
+		// 	}else{
+		// 		setXVel(-playerMaxSpeed);
+		// 	}
+		// }
+		// else if(rightSlide) {
+		// 	if (Math.abs(getXVel()) <= playerMaxSpeed) {
+		// 		setXVel(playerStartSpeed * 1.1);
+		// 	} else {
+		// 		setXVel(playerMaxSpeed);
+		// 	}
+		if (leftSlide) {
+			setXVel(-10);
+		} else if (rightSlide) {
+			setXVel(10);
 		}else{
 			setXVel(0);
 		}
