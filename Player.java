@@ -67,7 +67,6 @@ public class Player extends GameObject{
 		gameObjects.get("player1").setYPos(playerground);
 		gameObjects.get("player2").setXPos(800);
 		gameObjects.get("player2").setYPos(playerground);
-
 	}
 
 
