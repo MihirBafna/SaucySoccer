@@ -2,35 +2,46 @@ import javax.swing.JLabel;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 
 public abstract class GameObject{
+    // public fields //
+    public Graphics g;
+    // private fields //
     private JLabel object;
+    private ImageIcon img;
     private double xVel;
     private double yVel;
     private int xPos;
     private int yPos;
     private int size;
+    // protected constants //
+    protected static final int screenwidth = 1000;
+    protected static final int screenheight = 600;
+    protected static final double dt = 0.7;
+    protected static final double gravity = 1.0;
+    protected static final int playerStartSpeed = 7;
+    protected static final int playerMaxSpeed = 20;
+    protected static final int jumpspeed = 15;
+    protected static final int playerground = 420;
+    protected static final int ground = 450;
+    protected static final int minVel = 3;
+    protected static final double bouncefriction = 0.7;
+    protected static final double slidefriction = 0.5;
+    // protected fields //
     protected static HashMap<String,GameObject> gameObjects = new HashMap<String,GameObject>(3);
     protected Circle collisionArea; // this circle will be used for collision detection
     protected double sumOfRadii;
     protected String id;
-    protected int screenwidth = 1000;
-    protected int screenheight = 600;
-    protected double dt = 0.7;
-    protected double g = 1.0;
-    protected int playerspeed = 10;
-    protected int jumpspeed = 15;
-    protected int playerground = 410;
-    protected int ground = 450;
-    protected int minVel = 3;
-    protected double bouncefriction = 0.7;
-    protected double slidefriction = 0.5;
     protected boolean jump = false;
     protected boolean leftSlide = false;
     protected boolean rightSlide = false;
     protected boolean kick = false;
 
     public GameObject(ImageIcon img, int x, int y, int size, String key){
+        this.img = img;
         this.object = new JLabel(img);
         this.size = size;
         this.xPos = x;
@@ -44,6 +55,15 @@ public abstract class GameObject{
                 + Math.pow(A.getCenterY() - B.getCenterY(),2));
         sumOfRadii = A.getRadius() + B.getRadius();
         return distance <= sumOfRadii;
+    }
+
+    public void rotate(double theta){
+        BufferedImage buffer = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = (Graphics2D)buffer.getGraphics();
+        g2d.rotate(Math.PI/180*theta, size/2, size/2);
+        g2d.drawImage(img.getImage(), 0, 0, null);
+        this.img = new ImageIcon(buffer);
+        object.setIcon(img);
     }
 
     //abstract methods
@@ -102,24 +122,24 @@ public abstract class GameObject{
 
     public void setXPos(int x) {
         this.xPos = x;
-        object.setBounds(this.xPos,this.yPos,getSize(),getSize());
+        object.setBounds(this.xPos,this.yPos,size,size);
     }
 
     public void setYPos(int y) {
         this.yPos = y;
-        object.setBounds(this.xPos, this.yPos, getSize(), getSize());
+        object.setBounds(this.xPos, this.yPos, size, size);
 
     }
 
     public void changeXPos(int dx) {
         this.xPos += dx;
-        object.setBounds(this.xPos, this.yPos, getSize(), getSize());
+        object.setBounds(this.xPos, this.yPos, size, size);
 
     }
 
     public void changeYPos(int dy) {
         this.yPos += dy;
-        object.setBounds(this.xPos, this.yPos, getSize(), getSize());
+        object.setBounds(this.xPos, this.yPos, size, size);
 
     }
 
