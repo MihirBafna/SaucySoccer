@@ -22,6 +22,7 @@ public class Weapon extends GameObject{
 	}
 	
 	public void updatePos() {
+		rotations++;
 		d+=2.5;
 		deltaX = getXPos()-(attached.getXPos() + attached.getSize()/2);
 		deltaY = getYPos()-(attached.getYPos() + attached.getSize()/2);
@@ -34,7 +35,9 @@ public class Weapon extends GameObject{
 		aX = attached.getXPos()+newDeltaX*radius/newLength; aY = attached.getYPos()+newDeltaY*radius/newLength;
 		setXPos((int) aX);
 		setYPos((int) aY);
-		rotate(3*rotations);
+		if(rotations<40) {
+		rotate(0.05*rotations);
+		}
 	}
 
 	public void events() {
