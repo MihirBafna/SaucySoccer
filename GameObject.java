@@ -30,7 +30,6 @@ public abstract class GameObject{
     protected static final int minVel = 3;
     protected static final double bouncefriction = 0.7;
     protected static final double slidefriction = 0.5;
-    protected static int rotations = 0;
     // protected fields //
     protected static HashMap<String,GameObject> gameObjects = new HashMap<String,GameObject>(3);
     protected Circle collisionArea; // this circle will be used for collision detection
@@ -40,6 +39,7 @@ public abstract class GameObject{
     protected boolean leftSlide = false;
     protected boolean rightSlide = false;
     protected boolean kick = false;
+    protected int rotations = 0;
 
     public GameObject(ImageIcon img, int x, int y, int size, String key){
         this.img = img;
@@ -65,10 +65,6 @@ public abstract class GameObject{
         g2d.rotate(Math.PI/180*theta*rotations, size/2, size/2);
         g2d.drawImage(img.getImage(), 0, 0, null);
         object.setIcon(new ImageIcon(buffer));
-    }
-
-    public int getRotations() {
-    	return this.rotations;
     }
     
     //abstract methods

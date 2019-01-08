@@ -34,7 +34,7 @@ public class Weapon extends GameObject{
 		aX = attached.getXPos()+newDeltaX*radius/newLength; aY = attached.getYPos()+newDeltaY*radius/newLength;
 		setXPos((int) aX);
 		setYPos((int) aY);
-		rotate(3*getRotations());
+		rotate(3*rotations);
 	}
 
 	public void events() {
