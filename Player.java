@@ -106,5 +106,5 @@ public class Player extends GameObject{
 		return this.score;
 	}
 
-
+}
 
