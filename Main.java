@@ -80,7 +80,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball.updatePos();
 		player1.updatePos();
 		player2.updatePos();
-		weapon1.updatePos();
+		weapon1.events();
 		if(soccerball.getXPos() >= 900 && soccerball.getXPos() <= 960 && soccerball.getYPos() >= 323) {
 	        ((Player) player1).addScore();
 	        soccerball.resetPosition();
@@ -97,6 +97,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		}
 		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
         scoreDisplay.setText(scores);
+        System.out.println(((Weapon) weapon1).getWeaponSwing());
 	}
 
 	@Override
@@ -107,6 +108,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// player 1 key events
+		if(e.getKeyCode() == 70) {
+			((Weapon) weapon1).setWeaponSwing(true);
+		}
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
 		}
@@ -141,6 +145,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// player 1 key events
+		if(e.getKeyCode() == 70) {
+			((Weapon) weapon1).setWeaponSwing(false);
+		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(false);
 		}

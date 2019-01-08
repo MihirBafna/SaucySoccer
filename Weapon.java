@@ -15,6 +15,7 @@ public class Weapon extends GameObject{
 	private double aX;
 	private double aY;
 	private double d= 0;
+	private boolean weaponSwing = false;
 	
 	public Weapon(ImageIcon img, int x, int y, int size, String key,int whichPlayer) {
 		super(img, x, y, size, key);
@@ -41,7 +42,13 @@ public class Weapon extends GameObject{
 	}
 
 	public void events() {
-		
+		if(weaponSwing==false){
+			resetPos();
+			rotate(-0.05*rotations);
+			rotations=0;
+		}else if(weaponSwing == true) {
+			updatePos();
+		}
 	}
 
 	public void init() {
@@ -52,8 +59,24 @@ public class Weapon extends GameObject{
 			attached = gameObjects.get("player2");
 		}
 	}
+	
+	public void setWeaponSwing(boolean a) {
+		weaponSwing = a;
+	}
 
+	public boolean getWeaponSwing() {
+		return weaponSwing;
+	}
+	
+	public void resetPos() {
+		rotate(-30);
+		setXPos(attached.getXPos());
+		setYPos(attached.getYPos()-800);
+	}
+
+	@Override
 	public void resetPosition() {
+		// TODO Auto-generated method stub
 		
 	}
 
