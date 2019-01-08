@@ -11,16 +11,15 @@ public class Weapon extends GameObject{
 	private double deltaX;
 	private double newLength;
 	private GameObject attached;
+	private int whichPlayer;
 	private double aX;
 	private double aY;
 	private double d= 0;
 	
-	public Weapon(ImageIcon img, int x, int y, int size, String key, GameObject attached) {
+	public Weapon(ImageIcon img, int x, int y, int size, String key,int whichPlayer) {
 		super(img, x, y, size, key);
-		this.attached = attached;
+		this.whichPlayer = whichPlayer;
 	}
-
-	
 	
 	public void updatePos() {
 		d+=2.5;
@@ -44,11 +43,11 @@ public class Weapon extends GameObject{
 
 	public void init() {
 		gameObjects.put(id, this);
+		if (whichPlayer == 1) {
+			attached = gameObjects.get("player1");
+		} else if (whichPlayer == 2) {
+			attached = gameObjects.get("player2");
+		}
 	}
 
-
-
-
-
-	
 }
