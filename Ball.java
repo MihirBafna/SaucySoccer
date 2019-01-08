@@ -20,10 +20,10 @@ public class Ball extends GameObject{
         Circle player2 = gameObjects.get("player2").collisionArea;
         rotatecounter = (rotatecounter+1)%3;
         if(rotatecounter == 0){
-            if (getXVel() < 0) {
+            if (getXVel()<0) {
                 rotate(-12.0);
             }
-            else if (getXVel() > 0) {
+            else if(getXVel() > 0) {
                 rotate(12.0);
             }
         }
