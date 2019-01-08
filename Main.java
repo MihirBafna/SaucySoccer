@@ -22,7 +22,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject soccerball;
 	private GameObject player1;
 	private GameObject player2;
-
+	private GameObject weapon1;
 	// ------------------------------------- Method Definitions -------------------------------------------//
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
@@ -41,11 +41,17 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 				"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
+    weapon1 = new Weapon(new ImageIcon("images/SoccerBall.png"), 50 , 420, 50, "weapon1", player1);
+		// soccerball = new Ball(new BufferedImage("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
+		// 		"ball");
+		// player1 = new Player(new ImageIcon("images/SoccerBallBig.png"), 50, 420, 50, "player1");
+		// player2 = new Player(new ImageIcon("images/SoccerBallBig.png"), 900, 420, 50, "player2");
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
 		screen.add(player1.getLabel());
 		screen.add(player2.getLabel());
+		screen.add(weapon1.getLabel());
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
 		screen.setTitle("Saucy Soccer");
@@ -54,6 +60,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball.init();
 		player1.init();
 		player2.init();
+		weapon1.init();
 		screen.addKeyListener(this);
 		screen.addMouseMotionListener(this);
 		timer = new Timer(1000 / 60, this);
@@ -69,6 +76,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball.updatePos();
 		player1.updatePos();
 		player2.updatePos();
+		weapon1.updatePos();
 	}
 
 	@Override
