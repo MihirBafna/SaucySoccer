@@ -52,7 +52,6 @@ public class Weapon extends GameObject{
 
 	@Override
 	public void resetPosition() {
-		// TODO Auto-generated method stub
 		
 	}
 

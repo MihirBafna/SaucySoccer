@@ -84,4 +84,7 @@ public class Ball extends GameObject{
         gameObjects.get(id).collisionArea.setCenterY(getYPos()+getSize()/2);
     }
 
+    public void resetPosition(){
+        
+    }
 }
