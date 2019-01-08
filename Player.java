@@ -29,19 +29,6 @@ public class Player extends GameObject{
 			setYVel(-jumpspeed);
 			jump = false;
 		}
-		// if(leftSlide){
-		// 	if(Math.abs(getXVel())<=playerMaxSpeed){
-		// 		setXVel(-playerStartSpeed*1.1);
-		// 	}else{
-		// 		setXVel(-playerMaxSpeed);
-		// 	}
-		// }
-		// else if(rightSlide) {
-		// 	if (Math.abs(getXVel()) <= playerMaxSpeed) {
-		// 		setXVel(playerStartSpeed * 1.1);
-		// 	} else {
-		// 		setXVel(playerMaxSpeed);
-		// 	}
 		if (leftSlide) {
 			setXVel(-10);
 		} else if (rightSlide) {
