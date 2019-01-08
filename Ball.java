@@ -58,7 +58,7 @@ public class Ball extends GameObject{
         }else if (getXPos() >= 885 && getYPos() <= 330 && getYPos() >= 325) {
             setYVel(-getYVel());
         }
-        if (isCollision(ball, player1)) {
+        if (isCircleCollision(ball, player1)) {
             if(player1.getCenterX()<= ball.getCenterX()){
                 setXVel(10);
             }else if(player1.getCenterX()>=ball.getCenterX()){
@@ -68,7 +68,7 @@ public class Ball extends GameObject{
                 setYVel(-12);
             }
         }
-        if (isCollision(ball, player2)) {
+        if (isCircleCollision(ball, player2)) {
             if(player2.getCenterX()<=ball.getCenterX()){
                 setXVel(10);
             }else if(player2.getCenterX()>=ball.getCenterX()){
