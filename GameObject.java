@@ -21,7 +21,7 @@ public abstract class GameObject{
     protected static final int screenwidth = 1000;
     protected static final int screenheight = 600;
     protected static final double dt = 0.7;
-    protected static final double gravity = 1.0;
+    protected static final double gravity = 0.8;
     protected static final int playerStartSpeed = 7;
     protected static final int playerMaxSpeed = 20;
     protected static final int jumpspeed = 15;

@@ -133,7 +133,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		if (e.getKeyCode() == 39) { // right
 			player2.setRightSlide(true);
 		}
-		if (e.getKeyCode() == 17) { // right alt key
+		if (e.getKeyCode() == 18) { // right alt key
 			player2.setKick(true);
 		}
 	}
