@@ -2,6 +2,8 @@ import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
 public class Player extends GameObject{
 	private int score;
+	private int powerLevel;
+	private boolean usingPower;
 	private GameObject ball;
 	private GameObject player1;
 	private GameObject player2;
@@ -51,9 +53,22 @@ public class Player extends GameObject{
 		if (ball.getXPos() <= 100 && ball.getXPos() >= 0 && ball.getYPos() >= 323) {
 			((Player) player2).score++;
 			resetPosition();
-		}	
+		}
+		if(isCircleCollision(gameObjects.get("player1").collisionArea,gameObjects.get("ball").collisionArea)){
+		}
+		if (isCircleCollision(gameObjects.get("player2").collisionArea, gameObjects.get("ball").collisionArea)) {
+		}		
 		if (isCircleCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {
 		}
+		if(powerLevel <= 500) {
+			this.powerLevel++;
+		}
+		if(hasPower() && usingPower) {
+			if(isCircleCollision(gameObjects.get("player1").collisionArea,gameObjects.get("ball").collisionArea)){
+				this.applyPower(gameObjects.get("ball"));
+			}
+		}
+	
 	}
 
 	// updatePos method updates the position of the player based on changes made to the x and y velocities // 
@@ -64,10 +79,32 @@ public class Player extends GameObject{
 		gameObjects.get(id).collisionArea.setCenterY(getYPos()+getSize()/2);
 	}
 
+	public int getPowerLevel() {
+		return powerLevel;
+	}
+	public boolean hasPower() {
+		if(this.powerLevel >= 500) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void applyPower(GameObject go) {
+		go.setXVel(50);
+		this.powerLevel = 0;
+		this.usingPower = false;
+	}
+	public void setUsingPower() {
+		if(this.hasPower()) {
+		this.usingPower = true;
+		}
+	}
+	public boolean UsingPower() {
+		return this.usingPower;
+	}
 	public int getScore(){
 		return this.score;
 	}
 
 
 
-}

@@ -1,3 +1,4 @@
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -20,7 +21,11 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private JLabel goal1;
 	private JLabel goal2;
 	private JLabel scoreDisplay;
+	private JLabel powerDisplay1;
+	private JLabel powerDisplay2;
 	private String scores;
+	private String p1power;
+	private String p2power;
 	private GameObject soccerball;
 	private GameObject player1;
 	private GameObject player2;
@@ -37,10 +42,16 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		goal1 = new JLabel(new ImageIcon("images/goal1.png")); 
 		goal2 = new JLabel(new ImageIcon("images/goal2.png"));
 		scoreDisplay = new JLabel("");
+		powerDisplay1 = new JLabel("");
+		powerDisplay2 = new JLabel("");
 		goal1.setBounds(0, 345, 100, 125);
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
 		scoreDisplay.setBounds(500, 50, 50, 50);
+    powerDisplay1.setBounds(200, 50, 100, 100);
+	  powerDisplay2.setBounds(800, 50, 100, 100);
+    powerDisplay1.setFont(new Font("Courier New", Font.BOLD, 30));
+	  powerDisplay2.setFont(new Font("Courier New", Font.BOLD, 30));
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
@@ -51,7 +62,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.add(player1.getLabel());
 		screen.add(player2.getLabel());
 		screen.add(weapon1.getLabel());
-	    screen.add(scoreDisplay);
+		screen.add(powerDisplay1);
+		screen.add(powerDisplay2);
+	  screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
 		screen.setTitle("Saucy Soccer");
@@ -89,7 +102,13 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	public void displayScores(){
 		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
+		p1power = Integer.toString(((Player) player1).getPowerLevel());
+		p2power = Integer.toString(((Player) player2).getPowerLevel());
+    scoreDisplay.setText(scores);
+    powerDisplay1.setText(p1power);
+    powerDisplay2.setText(p2power);
 		scoreDisplay.setText(scores);
+
 	}
 
 	@Override
@@ -142,6 +161,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		}
 		if (e.getKeyCode() == 32) { // spacebar
 			player1.setKick(false);
+		}
+		if (e.getKeyCode() == 69) { // e key
+			((Player) player1).setUsingPower();
 		}
 		// player 2 key events
 		if (e.getKeyCode() == 37) { // left
