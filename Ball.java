@@ -65,7 +65,7 @@ public class Ball extends GameObject{
                 setXVel(-10);
             }
             if (gameObjects.get("player1").kick) {
-                setYVel(-15);
+                setYVel(-12);
             }
         }
         if (isCollision(ball, player2)) {
@@ -75,7 +75,7 @@ public class Ball extends GameObject{
                 setXVel(-10);
             }
             if(gameObjects.get("player2").kick){
-                setYVel(-15);
+                setYVel(-12);
             }
         }
     }

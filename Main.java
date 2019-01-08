@@ -1,4 +1,3 @@
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,7 +34,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	public Main() {
 		screen = new JFrame();
 		field = new JLabel(new ImageIcon("images/field.png"));
-		goal1 = new JLabel(new ImageIcon("images/goal1.png"));
+		goal1 = new JLabel(new ImageIcon("images/goal1.png")); 
 		goal2 = new JLabel(new ImageIcon("images/goal2.png"));
 		scoreDisplay = new JLabel("");
 		goal1.setBounds(0, 345, 100, 125);

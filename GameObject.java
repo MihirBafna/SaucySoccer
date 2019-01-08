@@ -21,10 +21,10 @@ public abstract class GameObject{
     protected static final int screenwidth = 1000;
     protected static final int screenheight = 600;
     protected static final double dt = 0.7;
-    protected static final double gravity = 0.8;
+    protected static final double gravity = 0.5;
     protected static final int playerStartSpeed = 7;
     protected static final int playerMaxSpeed = 20;
-    protected static final int jumpspeed = 15;
+    protected static final int jumpspeed = 10;
     protected static final int playerground = 420;
     protected static final int ground = 450;
     protected static final int minVel = 3;
