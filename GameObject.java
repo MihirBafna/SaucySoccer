@@ -75,7 +75,7 @@ public abstract class GameObject{
     public abstract void init();
 
     public abstract void resetPosition();
-
+    
     // getters
     public int getSize(){
         return this.size;

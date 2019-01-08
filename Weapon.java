@@ -50,7 +50,6 @@ public class Weapon extends GameObject{
 		}
 	}
 
-	@Override
 	public void resetPosition() {
 		
 	}
