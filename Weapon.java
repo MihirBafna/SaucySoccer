@@ -46,6 +46,7 @@ public class Weapon extends GameObject{
 			resetPos();
 			rotate(-0.05*rotations);
 			rotations=0;
+
 		}else if(weaponSwing == true) {
 			updatePos();
 		}
