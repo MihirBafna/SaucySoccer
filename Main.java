@@ -48,10 +48,10 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
 		scoreDisplay.setBounds(500, 50, 50, 50);
-    powerDisplay1.setBounds(200, 50, 100, 100);
-	  powerDisplay2.setBounds(800, 50, 100, 100);
-    powerDisplay1.setFont(new Font("Courier New", Font.BOLD, 30));
-	  powerDisplay2.setFont(new Font("Courier New", Font.BOLD, 30));
+    	powerDisplay1.setBounds(200, 50, 100, 100);
+	  	powerDisplay2.setBounds(800, 50, 100, 100);
+    	powerDisplay1.setFont(new Font("Courier New", Font.BOLD, 30));
+	 	powerDisplay2.setFont(new Font("Courier New", Font.BOLD, 30));
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
@@ -64,7 +64,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.add(weapon1.getLabel());
 		screen.add(powerDisplay1);
 		screen.add(powerDisplay2);
-	  screen.add(scoreDisplay);
+	  	screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
 		screen.setTitle("Saucy Soccer");
@@ -104,9 +104,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
 		p1power = Integer.toString(((Player) player1).getPowerLevel());
 		p2power = Integer.toString(((Player) player2).getPowerLevel());
-    scoreDisplay.setText(scores);
-    powerDisplay1.setText(p1power);
-    powerDisplay2.setText(p2power);
+    	scoreDisplay.setText(scores);
+    	powerDisplay1.setText(p1power);
+    	powerDisplay2.setText(p2power);
 		scoreDisplay.setText(scores);
 
 	}
@@ -118,17 +118,22 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyCode());
 		// player 1 key events
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
+			// soccerball.changeYPos(-5);
 		}
 		if (e.getKeyCode() == 83) { // down
+			soccerball.changeYPos(5);
 		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(true);
+			// soccerball.changeXPos(-5);
 		}
 		if (e.getKeyCode() == 68) { // right
 			player1.setRightSlide(true);
+			// soccerball.changeXPos(5);
 		}
 		if (e.getKeyCode() == 32) { // spacebar
 			player1.setKick(true);
@@ -174,6 +179,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		}
 		if (e.getKeyCode() == 18) { // right alt key
 			player2.setKick(false);
+		}
+		if (e.getKeyCode() == 80) { // e key
+			((Player) player2).setUsingPower();
 		}
 	}
 
