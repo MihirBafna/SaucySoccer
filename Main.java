@@ -83,7 +83,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.updatePos();
 		player2.updatePos();
 		weapon1.events();
-		weapon2.events();
 /*		if(soccerball.getXPos() >= 900 && soccerball.getXPos() <= 960 && soccerball.getYPos() >= 323) {
 	        ((Player) player1).addScore();
 	        soccerball.resetPosition();

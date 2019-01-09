@@ -79,14 +79,11 @@ public class Weapon extends GameObject{
 				setXPos(attached.getXPos());
 				setYPos(attached.getYPos()-25);
 			}
-			if(up) {
-				updatePosUp();
-			}else if(!up) {
-				updatePosDown();
+			updatePosUp();
 			}
 		}
 //		System.out.println(rotations);
-	}
+	
 
 	public void init() {
 		gameObjects.put(id, this);
