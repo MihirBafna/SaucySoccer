@@ -1,5 +1,5 @@
 import javax.swing.JLabel;
-import com.sun.javafx.geom.Rectangle;
+import java.awt.Rectangle;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
@@ -33,6 +33,8 @@ public abstract class GameObject{
     protected static final double slidefriction = 0.5;
     // protected fields //
     protected static HashMap<String,GameObject> gameObjects = new HashMap<String,GameObject>(3);
+    protected static Rectangle goalCrossBar1 = new Rectangle(0, 345, 105, 3);
+    protected static Rectangle goalCrossBar2 = new Rectangle(898,345, 102, 3);
     protected Circle collisionArea; // this circle will be used for collision detection
     protected double sumOfRadii;
     protected String id;
@@ -60,8 +62,11 @@ public abstract class GameObject{
     }
 
 
-    public boolean rectangleCircleCollision(Circle A, Rectangle B) {
-        return B.contains((int)A.getCenterX(), (int)A.getCenterY());
+    public boolean rectangleCircleCollision(Circle circle, Rectangle rect) {
+        Rectangle inscribed = new Rectangle((int) (circle.getCenterX() - circle.getRadius()),
+                (int) (circle.getCenterY() - circle.getRadius()), (int) (2 * circle.getRadius()),
+                (int) (2 * circle.getRadius()));
+        return inscribed.intersects(rect);
     }
 
     public void rotate(double theta){
@@ -92,6 +97,10 @@ public abstract class GameObject{
     public abstract void init();
     
     // getters
+    public ImageIcon getImg(){
+        return this.img;
+    }
+
     public int getSize(){
         return this.size;
     }
@@ -117,6 +126,7 @@ public abstract class GameObject{
     }
 
     // Setters 
+
     public void setJump(boolean x){
         this.jump = x;
     }
