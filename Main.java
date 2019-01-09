@@ -26,6 +26,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject player1;
 	private GameObject player2;
 	private GameObject weapon1;
+	private GameObject weapon2;
 	// ------------------------------------- Method Definitions -------------------------------------------//
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
@@ -45,13 +46,15 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
-    	weapon1 = new Weapon(new ImageIcon("images/TrainingStick.png"), 50 , 420, 50, "weapon1",1);
+    	weapon1 = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50 , 420, 50, "weapon1",1,true);
+    	weapon2 = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50 , 420, 50, "weapon2",1,false);
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
 		screen.add(player1.getLabel());
 		screen.add(player2.getLabel());
 		screen.add(weapon1.getLabel());
+		screen.add(weapon2.getLabel());
 	    screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
@@ -80,6 +83,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.updatePos();
 		player2.updatePos();
 		weapon1.events();
+		weapon2.events();
 /*		if(soccerball.getXPos() >= 900 && soccerball.getXPos() <= 960 && soccerball.getYPos() >= 323) {
 	        ((Player) player1).addScore();
 	        soccerball.resetPosition();
@@ -98,6 +102,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
         scoreDisplay.setText(scores);
  */     
 
+//		System.out.println("Xpos: " + weapon1.getXPos());
+//		System.out.println("Ypos: " + weapon1.getYPos());
 //		displayScores();
 
 	}
@@ -121,6 +127,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		// player 1 key events
 		if(e.getKeyCode() == 70) {
 			((Weapon) weapon1).setWeaponSwing(true);
+		}
+		if(e.getKeyCode() == 71) {
+			((Weapon) weapon2).setWeaponSwing(true);
 		}
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
@@ -158,6 +167,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		// player 1 key events
 		if(e.getKeyCode() == 70) {
 			((Weapon) weapon1).setWeaponSwing(false);
+		}
+		if(e.getKeyCode() == 70) {
+			((Weapon) weapon2).setWeaponSwing(false);
 		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(false);

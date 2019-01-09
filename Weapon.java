@@ -12,21 +12,44 @@ public class Weapon extends GameObject{
 	private double newLength;
 	private GameObject attached;
 	private int whichPlayer;
+	private double initX;
+	private double initY;
 	private double aX;
 	private double aY;
 	private double d= 0;
 	private boolean weaponSwing = false;
+	private boolean up;
 	
-	public Weapon(ImageIcon img, int x, int y, int size, String key,int whichPlayer) {
+	public Weapon(ImageIcon img, int x, int y, int size, String key,int whichPlayer, boolean isUp) {
 		super(img, x, y, size, key);
 		this.whichPlayer = whichPlayer;
+		this.up = isUp;
 	}
 	
-	public void updatePos() {
+	public void updatePosUp() {
 		rotations++;
 		d+=2.5;
-		deltaX = getXPos()-(attached.getXPos() + attached.getSize()/2);
-		deltaY = getYPos()-(attached.getYPos() + attached.getSize()/2);
+		deltaX = getXPos() -(attached.getXPos() + attached.getSize()/2);
+		deltaY = getYPos() -(attached.getYPos() + attached.getSize()/2);
+		//radius = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
+		radius = attached.getSize()/2;
+		orthoX = -deltaY*d/radius;
+		orthoY = deltaX*d/radius;
+		newDeltaX = deltaX+orthoX; newDeltaY = deltaY+orthoY;
+		newLength = Math.sqrt(newDeltaX*newDeltaX+newDeltaY*newDeltaY);
+		aX = attached.getXPos()+newDeltaX*radius/newLength; aY = attached.getYPos()+newDeltaY*radius/newLength;
+		setXPos((int) aX);
+		setYPos((int) aY);
+		if(rotations<40) {
+		rotate(0.05*rotations);
+		}
+	}
+	
+	public void updatePosDown() {
+		rotations++;
+		d-=2.5;
+		deltaX = getXPos() -(attached.getXPos() + attached.getSize()/2);
+		deltaY = getYPos() -(attached.getYPos() + attached.getSize()/2);
 		//radius = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
 		radius = attached.getSize()/2;
 		orthoX = -deltaY*d/radius;
@@ -43,13 +66,26 @@ public class Weapon extends GameObject{
 
 	public void events() {
 		if(weaponSwing==false){
-			resetPos();
-			rotate(-0.05*rotations);
+			resetPosUp();
+			if(up) {
+				rotate(-0.05*rotations);
+			}else {
+				rotate(0.05*rotations);
+			}
 			rotations=0;
 
 		}else if(weaponSwing == true) {
-			updatePos();
+			if(rotations==0) {
+				setXPos(attached.getXPos());
+				setYPos(attached.getYPos()-25);
+			}
+			if(up) {
+				updatePosUp();
+			}else if(!up) {
+				updatePosDown();
+			}
 		}
+//		System.out.println(rotations);
 	}
 
 	public void init() {
@@ -69,14 +105,21 @@ public class Weapon extends GameObject{
 		return weaponSwing;
 	}
 	
-	public void resetPos() {
-		rotate(-30);
+	public void resetPosUp() {
+		//rotate(-30);
+		d=0;
 		setXPos(attached.getXPos());
 		setYPos(attached.getYPos()-800);
 	}
 
 	@Override
 	public void resetPosition() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updatePos() {
 		// TODO Auto-generated method stub
 		
 	}
