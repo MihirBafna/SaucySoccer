@@ -4,9 +4,8 @@ public class Player extends GameObject{
 	private int score;
 	private int powerLevel;
 	private boolean usingPower;
-	private GameObject ball;
-	private GameObject player1;
-	private GameObject player2;
+	private ImageIcon poweredplayer1 = new ImageIcon("images/player1powered.gif");
+	private ImageIcon poweredplayer2 = new ImageIcon("images/player1powered.gif");
 
 	public Player(ImageIcon image, int x, int y, int size, String key){
 		super(image,x,y,size, key);
@@ -21,9 +20,6 @@ public class Player extends GameObject{
 
 	// events method contains a series of if statements that affect the players velocity and position //
 	public void events(){
-		ball = gameObjects.get("ball");
-		player1 = gameObjects.get("player1");
-		player2 = gameObjects.get("player2");
 		if(getYPos() <= playerground) changeYVel(gravity*dt); //above the ground
 		if (getYPos() >= playerground) {				//on the ground
 			setYPos(playerground);
@@ -40,35 +36,50 @@ public class Player extends GameObject{
 			jump = false;
 		}
 		if (leftSlide) {
-			setXVel(-10);
+			setXVel(-8);
 		} else if (rightSlide) {
-			setXVel(10);
+			setXVel(8);
 		}else{
 			setXVel(0);
 		}
-		if (ball.getXPos() >= 900 && ball.getXPos() <= 960 && ball.getYPos() >= 323) {
-			((Player)player1).score++;
-			resetPosition();
-		}
-		if (ball.getXPos() <= 100 && ball.getXPos() >= 0 && ball.getYPos() >= 323) {
-			((Player) player2).score++;
-			resetPosition();
-		}
-		if(isCircleCollision(gameObjects.get("player1").collisionArea,gameObjects.get("ball").collisionArea)){
-		}
-		if (isCircleCollision(gameObjects.get("player2").collisionArea, gameObjects.get("ball").collisionArea)) {
-		}		
+		// if (ball.getXPos() >= 900 && ball.getXPos() <= 960 && ball.getYPos() >= 323) {
+		// 	((Player)player1).score++;
+		// 	resetPosition();
+		// }
+		// if (ball.getXPos() <= 100 && ball.getXPos() >= 0 && ball.getYPos() >= 323) {
+		// 	((Player) player2).score++;
+		// 	resetPosition();
+		// }	
 		if (isCircleCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {
 		}
 		if(powerLevel <= 500) {
 			this.powerLevel++;
 		}
-		if(hasPower() && usingPower) {
-			if(isCircleCollision(gameObjects.get("player1").collisionArea,gameObjects.get("ball").collisionArea)){
-				this.applyPower(gameObjects.get("ball"));
+		if(((Player)gameObjects.get("player1")).hasPower()) {
+			if(((Player)gameObjects.get("player1")).usingPower){
+				((Player) gameObjects.get("player1")).getLabel().setIcon(poweredplayer1);
+				if (isCircleCollision(gameObjects.get("player1").collisionArea,
+						gameObjects.get("ball").collisionArea)) {
+					this.applyPower(1);
+				}
 			}
 		}
-	
+		else {
+			gameObjects.get("player1").getLabel().setIcon(gameObjects.get("player1").getImg());
+		}
+		if (((Player) gameObjects.get("player2")).hasPower()) {
+			if (((Player) gameObjects.get("player2")).usingPower) {
+				((Player) gameObjects.get("player2")).getLabel().setIcon(poweredplayer2);
+				if (isCircleCollision(gameObjects.get("player2").collisionArea,
+						gameObjects.get("ball").collisionArea)) {
+					this.applyPower(2);
+				}
+			}
+
+		} else {
+			gameObjects.get("player2").getLabel().setIcon(gameObjects.get("player2").getImg());
+		}
+
 	}
 
 	// updatePos method updates the position of the player based on changes made to the x and y velocities // 
@@ -82,22 +93,26 @@ public class Player extends GameObject{
 	public int getPowerLevel() {
 		return powerLevel;
 	}
+
 	public boolean hasPower() {
 		if(this.powerLevel >= 500) {
 			return true;
+		}else{
+			return false;
 		}
-		return false;
 	}
 	
-	public void applyPower(GameObject go) {
-		go.setXVel(50);
+	public void applyPower(int whichPlayer) {
+		if(whichPlayer == 1){
+			gameObjects.get("ball").setXVel(50);
+		}else if (whichPlayer == 2){
+			gameObjects.get("ball").setXVel(-50);
+		}
 		this.powerLevel = 0;
 		this.usingPower = false;
 	}
 	public void setUsingPower() {
-		if(this.hasPower()) {
 		this.usingPower = true;
-		}
 	}
 	public boolean UsingPower() {
 		return this.usingPower;
