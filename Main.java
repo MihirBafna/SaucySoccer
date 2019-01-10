@@ -118,7 +118,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
 		// player 1 key events
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
@@ -180,7 +179,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		if (e.getKeyCode() == 18) { // right alt key
 			player2.setKick(false);
 		}
-		if (e.getKeyCode() == 80) { // e key
+		if (e.getKeyCode() == 80) { // p key
 			((Player) player2).setUsingPower();
 		}
 	}

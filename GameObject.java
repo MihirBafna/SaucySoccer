@@ -30,11 +30,13 @@ public abstract class GameObject{
     protected static final int ground = 450;
     protected static final int minVel = 3;
     protected static final double bouncefriction = 0.7;
-    protected static final double slidefriction = 0.5;
+    protected static final double slidefriction = 2;
     // protected fields //
-    protected static HashMap<String,GameObject> gameObjects = new HashMap<String,GameObject>(3);
     protected static Rectangle goalCrossBar1 = new Rectangle(0, 345, 105, 3);
     protected static Rectangle goalCrossBar2 = new Rectangle(898,345, 102, 3);
+    protected static Rectangle goal1 = new Rectangle(0, 341, 95, 80);
+    protected static Rectangle goal2 = new Rectangle(898, 345, 102, 3);
+    protected static HashMap<String, GameObject> gameObjects = new HashMap<String, GameObject>(3);
     protected Circle collisionArea; // this circle will be used for collision detection
     protected double sumOfRadii;
     protected String id;

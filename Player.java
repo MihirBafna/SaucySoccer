@@ -49,7 +49,9 @@ public class Player extends GameObject{
 		// if (ball.getXPos() <= 100 && ball.getXPos() >= 0 && ball.getYPos() >= 323) {
 		// 	((Player) player2).score++;
 		// 	resetPosition();
-		// }	
+		// }
+		if(rectangleCircleCollision(collisionArea,goalCrossBar1)||rectangleCircleCollision(collisionArea,goalCrossBar2)){
+		}
 		if (isCircleCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {
 		}
 		if(powerLevel <= 500) {
