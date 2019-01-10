@@ -163,7 +163,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		}
 		if(e.getKeyCode() == 71) {
 			((Weapon) weapon2).setWeaponSwing(false);
-		}
+		} 
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(false);
 		}
