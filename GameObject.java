@@ -1,4 +1,5 @@
 import javax.swing.JLabel;
+import java.awt.Rectangle;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javafx.scene.shape.Circle;
@@ -21,10 +22,10 @@ public abstract class GameObject{
     protected static final int screenwidth = 1000;
     protected static final int screenheight = 600;
     protected static final double dt = 0.7;
-    protected static final double gravity = 0.8;
+    protected static final double gravity = 0.5;
     protected static final int playerStartSpeed = 7;
     protected static final int playerMaxSpeed = 20;
-    protected static final int jumpspeed = 15;
+    protected static final int jumpspeed = 10;
     protected static final int playerground = 420;
     protected static final int ground = 450;
     protected static final int minVel = 3;
@@ -32,6 +33,8 @@ public abstract class GameObject{
     protected static final double slidefriction = 0.5;
     // protected fields //
     protected static HashMap<String,GameObject> gameObjects = new HashMap<String,GameObject>(3);
+    protected static Rectangle goalCrossBar1 = new Rectangle(0, 345, 105, 3);
+    protected static Rectangle goalCrossBar2 = new Rectangle(898,345, 102, 3);
     protected Circle collisionArea; // this circle will be used for collision detection
     protected double sumOfRadii;
     protected String id;
@@ -51,11 +54,19 @@ public abstract class GameObject{
         this.getLabel().setBounds(xPos, yPos, size, size);
     }
 
-    public boolean isCollision(Circle A, Circle B){ // this method determines whether or not two objects are colliding
+    public boolean isCircleCollision(Circle A, Circle B){ // this method determines whether or not two objects are colliding
         double distance = Math.sqrt(Math.pow(A.getCenterX() - B.getCenterX(), 2)  // this calculates the distance between the centers of the two objects
                 + Math.pow(A.getCenterY() - B.getCenterY(),2));
         sumOfRadii = A.getRadius() + B.getRadius();
         return distance <= sumOfRadii;
+    }
+
+
+    public boolean rectangleCircleCollision(Circle circle, Rectangle rect) {
+        Rectangle inscribed = new Rectangle((int) (circle.getCenterX() - circle.getRadius()),
+                (int) (circle.getCenterY() - circle.getRadius()), (int) (2 * circle.getRadius()),
+                (int) (2 * circle.getRadius()));
+        return inscribed.intersects(rect);
     }
 
     public void rotate(double theta){
@@ -86,6 +97,10 @@ public abstract class GameObject{
     public abstract void init();
     
     // getters
+    public ImageIcon getImg(){
+        return this.img;
+    }
+
     public int getSize(){
         return this.size;
     }
@@ -111,6 +126,7 @@ public abstract class GameObject{
     }
 
     // Setters 
+
     public void setJump(boolean x){
         this.jump = x;
     }

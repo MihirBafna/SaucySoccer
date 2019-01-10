@@ -1,4 +1,4 @@
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -43,11 +43,15 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
 		scoreDisplay.setBounds(500, 50, 50, 50);
+    powerDisplay1.setBounds(200, 50, 100, 100);
+	  powerDisplay2.setBounds(800, 50, 100, 100);
+    powerDisplay1.setFont(new Font("Courier New", Font.BOLD, 30));
+	 	powerDisplay2.setFont(new Font("Courier New", Font.BOLD, 30));
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
-    	weapon1 = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50 , 420, 50, "weapon1",1,true);
-    	weapon2 = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50 , 420, 50, "weapon2",1,false);
+    weapon1 = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50 , 420, 50, "weapon1",1,true);
+    weapon2 = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50 , 420, 50, "weapon2",1,false);
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
@@ -55,7 +59,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.add(player2.getLabel());
 		screen.add(weapon1.getLabel());
 		screen.add(weapon2.getLabel());
-	    screen.add(scoreDisplay);
+    screen.add(powerDisplay1);
+		screen.add(powerDisplay2);
+	  screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
 		screen.setTitle("Saucy Soccer");
@@ -83,27 +89,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.updatePos();
 		player2.updatePos();
 		weapon1.events();
-/*		if(soccerball.getXPos() >= 900 && soccerball.getXPos() <= 960 && soccerball.getYPos() >= 323) {
-	        ((Player) player1).addScore();
-	        soccerball.resetPosition();
-			soccerball.setXVel(0);
-			soccerball.setYVel(0);
-	        player1.resetPosition();
-		}
-		if(soccerball.getXPos() <= 100 && soccerball.getXPos() >= 0 && soccerball.getYPos() >= 323) {
-			((Player) player2).addScore();
-			soccerball.resetPosition();
-			soccerball.setXVel(0);
-			soccerball.setYVel(0);
-			player1.resetPosition();
-		}
-		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
-        scoreDisplay.setText(scores);
- */     
-
-//		System.out.println("Xpos: " + weapon1.getXPos());
-//		System.out.println("Ypos: " + weapon1.getYPos());
-//		displayScores();
+    displayScores();
 
 	}
 
@@ -113,7 +99,13 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	public void displayScores(){
 		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
-		scoreDisplay.setText(scores);
+		p1power = Integer.toString(((Player) player1).getPowerLevel());
+		p2power = Integer.toString(((Player) player2).getPowerLevel());
+    scoreDisplay.setText(scores);
+    powerDisplay1.setText(p1power);
+    powerDisplay2.setText(p2power);
+    scoreDisplay.setText(scores);
+
 	}
 
 	@Override

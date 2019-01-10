@@ -24,10 +24,10 @@ public class Ball extends GameObject{
         rotatecounter = (rotatecounter+1)%3;
         if(rotatecounter == 0){
             if (getXVel()<0) {
-                rotate(-12.0);
+                rotate(-14.0);
             }
             else if(getXVel() > 0) {
-                rotate(12.0);
+                rotate(14.0);
             }
         }
         if (getYPos() <= ground) changeYVel(gravity*dt);
@@ -52,30 +52,41 @@ public class Ball extends GameObject{
             setXPos(0);
             setXVel(-getXVel());
         }
-        if(getXPos() >= 900 && getXPos() <= 960 && getYPos() >= 323){
-        }else if(getXPos() >= 885 && getYPos() <= 325 && getYPos() >= 320){
-            setYVel(-getYVel());
-        }else if (getXPos() >= 885 && getYPos() <= 330 && getYPos() >= 325) {
-            setYVel(-getYVel());
+        if(rectangleCircleCollision(ball, goalCrossBar1)|| rectangleCircleCollision(ball, goalCrossBar2)){
+            if (getYPos() >= goalCrossBar1.getY()) {
+                setYPos((int) (goalCrossBar1.getY()+goalCrossBar1.getHeight()));
+            }
+            setYVel(-(getYVel()+3));
         }
-        if (isCollision(ball, player1)) {
+        if (isCircleCollision(ball, player1)) {
             if(player1.getCenterX()<= ball.getCenterX()){
                 setXVel(10);
             }else if(player1.getCenterX()>=ball.getCenterX()){
                 setXVel(-10);
             }
+            if (player1.getCenterY() <= ball.getCenterY() && Math.abs(gameObjects.get("player1").getYVel()) > 0) {
+                setYVel(10);
+            } else if (player1.getCenterY() >= ball.getCenterY()
+                    && Math.abs(gameObjects.get("player1").getYVel()) > 0) {
+                setYVel(-10);
+            }
             if (gameObjects.get("player1").kick) {
-                setYVel(-15);
+                setYVel(-12);
             }
         }
-        if (isCollision(ball, player2)) {
+        if (isCircleCollision(ball, player2)) {
             if(player2.getCenterX()<=ball.getCenterX()){
                 setXVel(10);
             }else if(player2.getCenterX()>=ball.getCenterX()){
                 setXVel(-10);
             }
+            if(player2.getCenterY()<=ball.getCenterY()&& Math.abs(gameObjects.get("player2").getYVel())>0){
+                setYVel(10);
+            }else if(player2.getCenterY() >= ball.getCenterY() && Math.abs(gameObjects.get("player2").getYVel()) > 0) {
+                setYVel(-10);
+            }
             if(gameObjects.get("player2").kick){
-                setYVel(-15);
+                setYVel(-12);
             }
         }
     }

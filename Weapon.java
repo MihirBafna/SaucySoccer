@@ -92,8 +92,7 @@ public class Weapon extends GameObject{
 		} else if (whichPlayer == 2) {
 			attached = gameObjects.get("player2");
 		}
-	}
-	
+	}	
 	public void setWeaponSwing(boolean a) {
 		weaponSwing = a;
 	}
@@ -107,12 +106,6 @@ public class Weapon extends GameObject{
 		d=0;
 		setXPos(attached.getXPos());
 		setYPos(attached.getYPos()-800);
-	}
-
-	@Override
-	public void resetPosition() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
