@@ -1,4 +1,3 @@
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -7,7 +6,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.Timer;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,7 +42,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject player1;
 	private GameObject player2;
 	private GameObject weapon1;
-  private GameObject weapon2;
+  	private GameObject weapon2;
 
 	// ------------------------------------- Method Definitions
 	// -------------------------------------------//
@@ -67,8 +65,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
 		scoreDisplay.setBounds(screenwidth/2 - 15, 50, 50, 50);
-		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
-				"ball");
+		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
 		weapon1 = new Weapon(new ImageIcon("images/TrainingStick.png"), 50, 420, 50, "weapon1", 1,false);
