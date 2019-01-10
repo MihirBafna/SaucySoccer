@@ -82,7 +82,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player1.updatePos();
 		player2.updatePos();
 		weapon1.events();
-    displayScores();
+    	displayScores();
 
 	}
 

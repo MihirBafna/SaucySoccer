@@ -12,8 +12,6 @@ public class Weapon extends GameObject{
 	private double newLength;
 	private GameObject attached;
 	private int whichPlayer;
-	private double initX;
-	private double initY;
 	private double aX;
 	private double aY;
 	private double d= 0;
