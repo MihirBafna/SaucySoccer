@@ -1,4 +1,3 @@
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -21,15 +20,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private JLabel goal1;
 	private JLabel goal2;
 	private JLabel scoreDisplay;
-	private JLabel powerDisplay1;
-	private JLabel powerDisplay2;
 	private String scores;
-	private String p1power;
-	private String p2power;
 	private GameObject soccerball;
 	private GameObject player1;
 	private GameObject player2;
 	private GameObject weapon1;
+	private GameObject weapon2;
 	// ------------------------------------- Method Definitions -------------------------------------------//
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
@@ -39,31 +35,25 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	public Main() {
 		screen = new JFrame();
 		field = new JLabel(new ImageIcon("images/field.png"));
-		goal1 = new JLabel(new ImageIcon("images/goal1.png")); 
+		goal1 = new JLabel(new ImageIcon("images/goal1.png"));
 		goal2 = new JLabel(new ImageIcon("images/goal2.png"));
 		scoreDisplay = new JLabel("");
-		powerDisplay1 = new JLabel("");
-		powerDisplay2 = new JLabel("");
 		goal1.setBounds(0, 345, 100, 125);
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
 		scoreDisplay.setBounds(500, 50, 50, 50);
-    	powerDisplay1.setBounds(200, 50, 100, 100);
-	  	powerDisplay2.setBounds(800, 50, 100, 100);
-    	powerDisplay1.setFont(new Font("Courier New", Font.BOLD, 30));
-	 	powerDisplay2.setFont(new Font("Courier New", Font.BOLD, 30));
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
-    	weapon1 = new Weapon(new ImageIcon("images/TrainingStick.png"), 50 , 420, 50, "weapon1",1);
+    	weapon1 = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50 , 420, 50, "weapon1",1,true);
+    	weapon2 = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50 , 420, 50, "weapon2",1,false);
 		screen.add(goal1);
 		screen.add(goal2);
 		screen.add(soccerball.getLabel());
 		screen.add(player1.getLabel());
 		screen.add(player2.getLabel());
 		screen.add(weapon1.getLabel());
-		screen.add(powerDisplay1);
-		screen.add(powerDisplay2);
+		screen.add(weapon2.getLabel());
 	  	screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
@@ -91,8 +81,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball.updatePos();
 		player1.updatePos();
 		player2.updatePos();
-		weapon1.updatePos();
-		displayScores();
+		weapon1.events();
+    displayScores();
 
 	}
 
@@ -102,12 +92,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	public void displayScores(){
 		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
-		p1power = Integer.toString(((Player) player1).getPowerLevel());
-		p2power = Integer.toString(((Player) player2).getPowerLevel());
     	scoreDisplay.setText(scores);
-    	powerDisplay1.setText(p1power);
-    	powerDisplay2.setText(p2power);
-		scoreDisplay.setText(scores);
+    	scoreDisplay.setText(scores);
 
 	}
 
@@ -119,20 +105,22 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// player 1 key events
+		if(e.getKeyCode() == 70) {
+			((Weapon) weapon1).setWeaponSwing(true);
+		}
+		if(e.getKeyCode() == 71) {
+			((Weapon) weapon2).setWeaponSwing(true);
+		}
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
-			// soccerball.changeYPos(-5);
 		}
 		if (e.getKeyCode() == 83) { // down
-			soccerball.changeYPos(5);
 		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(true);
-			// soccerball.changeXPos(-5);
 		}
 		if (e.getKeyCode() == 68) { // right
 			player1.setRightSlide(true);
-			// soccerball.changeXPos(5);
 		}
 		if (e.getKeyCode() == 32) { // spacebar
 			player1.setKick(true);
@@ -157,6 +145,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// player 1 key events
+		if(e.getKeyCode() == 70) {
+			((Weapon) weapon1).setWeaponSwing(false);
+		}
+		if(e.getKeyCode() == 70) {
+			((Weapon) weapon2).setWeaponSwing(false);
+		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(false);
 		}
