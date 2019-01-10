@@ -44,6 +44,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject player1;
 	private GameObject player2;
 	private GameObject weapon1;
+  private GameObject weapon2;
 
 	// ------------------------------------- Method Definitions
 	// -------------------------------------------//
@@ -104,10 +105,10 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball.events();
 		player1.events();
 		player2.events();
+    weapon1.events();
 		soccerball.updatePos();
 		player1.updatePos();
 		player2.updatePos();
-		weapon1.updatePos();
 		displayScores();
 		displayPowerBars();
 	}
@@ -152,8 +153,13 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
 		// player 1 key events
+    if(e.getKeyCode() == 70) {
+			((Weapon) weapon1).setWeaponSwing(true);
+		}
+		if(e.getKeyCode() == 71) {
+			((Weapon) weapon2).setWeaponSwing(true);
+		}
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
 			// soccerball.changeYPos(-5);
