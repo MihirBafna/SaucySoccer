@@ -24,23 +24,25 @@ public class Weapon extends GameObject {
 		up = isUp;
 	}
 
-	public void updateWeaponPos() {
-		if(up) {	
+	public void updatePos() {
+		if (up) {
 			rotations++;
-			d+=2.5;
-			deltaX = getXPos() -(attached.getXPos() + attached.getSize()/2);
-			deltaY = getYPos() -(attached.getYPos() + attached.getSize()/2);
-			//radius = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
-			radius = attached.getSize()/2 + 5;
-			orthoX = -deltaY*d/radius;
-			orthoY = deltaX*d/radius;
-			newDeltaX = deltaX+orthoX; newDeltaY = deltaY+orthoY;
-			newLength = Math.sqrt(newDeltaX*newDeltaX+newDeltaY*newDeltaY);
-			aX = attached.getXPos()+newDeltaX*radius/newLength; aY = attached.getYPos()+newDeltaY*radius/newLength;
+			d += 2.5;
+			deltaX = getXPos() - (attached.getXPos() + attached.getSize() / 2);
+			deltaY = getYPos() - (attached.getYPos() + attached.getSize() / 2);
+			// radius = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
+			radius = attached.getSize() / 2 + 5;
+			orthoX = -deltaY * d / radius;
+			orthoY = deltaX * d / radius;
+			newDeltaX = deltaX + orthoX;
+			newDeltaY = deltaY + orthoY;
+			newLength = Math.sqrt(newDeltaX * newDeltaX + newDeltaY * newDeltaY);
+			aX = attached.getXPos() + newDeltaX * radius / newLength;
+			aY = attached.getYPos() + newDeltaY * radius / newLength;
 			setXPos((int) aX);
 			setYPos((int) aY);
-			if(rotations<40) {
-			rotate(0.05*rotations);
+			if (rotations < 40) {
+				rotate(0.05 * rotations);
 			}
 		}
 		if (!up) {
@@ -63,7 +65,6 @@ public class Weapon extends GameObject {
 				rotate(-0.05 * rotations);
 			}
 		}
-
 	}
 
 	public void events() {
@@ -81,7 +82,7 @@ public class Weapon extends GameObject {
 				setXPos(attached.getXPos());
 				setYPos(attached.getYPos()-25);
 			}
-			updateWeaponPos();
+			updatePos();
 			}
 	}
 
@@ -109,8 +110,5 @@ public class Weapon extends GameObject {
 		setYPos(attached.getYPos()-800);
 	}
 
-	@Override
-	public void updatePos() {
-		
-	}
+
 }
