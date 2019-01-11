@@ -5,8 +5,8 @@ import javax.sound.sampled.*;
 public class SoundEffect {
 
 	private Clip clip;
-
-	public static final SoundEffect test = new SoundEffect("music/synthygamebeat.wav");
+	private boolean repeat;
+	public static final SoundEffect synthybeat = new SoundEffect("music/synthygamebeat.wav");
 
 	public static enum Volume {
 		MUTE, LOW, MEDIUM, HIGH
@@ -36,12 +36,19 @@ public class SoundEffect {
 
 	public void play() {
 		if (volume != Volume.MUTE) {
-			if (clip.isRunning()) {
-				clip.stop(); // Stop the player if it is still running
+			if (this.repeat){
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
+			}else{
+				if (clip.isRunning()) {
+					clip.stop(); // Stop the player if it is still running
+				}
+				clip.setFramePosition(0); // Rewind to the beginning
+				clip.start(); // Start playing
 			}
-			clip.setFramePosition(0); // Rewind to the beginning
-			clip.start(); // Start playing
 		}
 
+	}
+	public void setRepeat(boolean x){
+		this.repeat = x;
 	}
 }

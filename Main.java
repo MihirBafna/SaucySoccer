@@ -96,7 +96,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		timer.start();
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
-		SoundEffect.test.play();
+		SoundEffect.synthybeat.setRepeat(true);
+		SoundEffect.synthybeat.play();
 	}
 
 	public void loop() {
