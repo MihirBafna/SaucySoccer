@@ -1,7 +1,7 @@
 import javax.swing.ImageIcon;
 
-public class Weapon extends GameObject{
-	
+public class Weapon extends GameObject {
+
 	private double radius;
 	private double orthoX;
 	private double orthoY;
@@ -14,16 +14,16 @@ public class Weapon extends GameObject{
 	private int whichPlayer;
 	private double aX;
 	private double aY;
-	private double d= 0;
+	private double d = 0;
 	private boolean weaponSwing = false;
 	private boolean up;
-	
+
 	public Weapon(ImageIcon img, int x, int y, int size, String key,int whichPlayer, boolean isUp) {
 		super(img, x, y, size, key);
 		this.whichPlayer = whichPlayer;
 		this.up = isUp;
 	}
-	
+
 	public void updatePosUp() {
 		rotations++;
 		d+=2.5;
@@ -42,7 +42,7 @@ public class Weapon extends GameObject{
 		rotate(0.05*rotations);
 		}
 	}
-	
+
 	public void updatePosDown() {
 		rotations++;
 		d-=2.5;
@@ -80,8 +80,7 @@ public class Weapon extends GameObject{
 			updatePosUp();
 			}
 		}
-//		System.out.println(rotations);
-	
+	// System.out.println(rotations);
 
 	public void init() {
 		gameObjects.put(id, this);
@@ -90,7 +89,8 @@ public class Weapon extends GameObject{
 		} else if (whichPlayer == 2) {
 			attached = gameObjects.get("player2");
 		}
-	}	
+	}
+
 	public void setWeaponSwing(boolean a) {
 		weaponSwing = a;
 	}
@@ -98,7 +98,7 @@ public class Weapon extends GameObject{
 	public boolean getWeaponSwing() {
 		return weaponSwing;
 	}
-	
+
 	public void resetPosUp() {
 		//rotate(-30);
 		d=0;
@@ -108,8 +108,6 @@ public class Weapon extends GameObject{
 
 	@Override
 	public void updatePos() {
-		// TODO Auto-generated method stub
 		
 	}
-
 }

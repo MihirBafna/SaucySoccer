@@ -44,8 +44,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject weapon1;
   	private GameObject weapon2;
 
-	// ------------------------------------- Method Definitions
-	// -------------------------------------------//
+	// ------------------------------------- Method Definitions -------------------------------------------//
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		Main main = new Main();
@@ -68,7 +67,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
-		weapon1 = new Weapon(new ImageIcon("images/TrainingStick.png"), 50, 420, 50, "weapon1", 1,false);
+		weapon1 = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50, 420, 50, "weapon1", 1,true);
+		weapon2 = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50, 420, 50, "weapon2", 1, false);
 		screen.add(powerbar1);
 		screen.add(powerbar2);
 		screen.add(goal1);
@@ -95,7 +95,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
 		SoundEffect.test.play();
-		SoundEffect.test.play();
 	}
 
 	public void loop() {
@@ -115,7 +114,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	}
 
 	public void displayScores() {
-		scores = ((Player) player1).getScore() + " : " + ((Player) player2).getScore();
+		scores = ((Player) player1).getScore()/2 + " : " + ((Player) player2).getScore()/2;
 		scoreDisplay.setText(scores);
 		scoreDisplay.setText(scores);
 	}
@@ -151,7 +150,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// player 1 key events
-    if(e.getKeyCode() == 70) {
+    	if(e.getKeyCode() == 70) {
 			((Weapon) weapon1).setWeaponSwing(true);
 		}
 		if(e.getKeyCode() == 71) {
@@ -159,18 +158,14 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		}
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
-			// soccerball.changeYPos(-5);
 		}
 		if (e.getKeyCode() == 83) { // down
-			soccerball.changeYPos(5);
 		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(true);
-			// soccerball.changeXPos(-5);
 		}
 		if (e.getKeyCode() == 68) { // right
 			player1.setRightSlide(true);
-			// soccerball.changeXPos(5);
 		}
 		if (e.getKeyCode() == 32) { // spacebar
 			player1.setKick(true);
@@ -195,6 +190,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// player 1 key events
+		if (e.getKeyCode() == 70) {
+			((Weapon) weapon1).setWeaponSwing(false);
+		}
+		if (e.getKeyCode() == 71) {
+			((Weapon) weapon2).setWeaponSwing(false);
+		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(false);
 		}

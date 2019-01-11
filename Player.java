@@ -7,6 +7,9 @@ public class Player extends GameObject {
 	private boolean usingPower = false;
 	private ImageIcon poweredplayer1 = new ImageIcon("images/player1powered.gif");
 	private ImageIcon poweredplayer2 = new ImageIcon("images/player1powered.gif");
+	private GameObject ball ;
+	private GameObject player1;
+	private GameObject player2;
 
 	public Player(ImageIcon image, int x, int y, int size, String key) {
 		super(image, x, y, size, key);
@@ -22,6 +25,9 @@ public class Player extends GameObject {
 	// events method contains a series of if statements that affect the players
 	// velocity and position //
 	public void events() {
+		ball = gameObjects.get("ball");
+		player1 = gameObjects.get("player1");
+		player2 = gameObjects.get("player2");
 		if (getYPos() <= playerground)
 			changeYVel(gravity * dt); // above the ground
 		if (getYPos() >= playerground) { // on the ground
@@ -45,15 +51,14 @@ public class Player extends GameObject {
 		} else {
 			setXVel(0);
 		}
-		// if (ball.getXPos() >= 900 && ball.getXPos() <= 960 && ball.getYPos() >= 323)
-		// {
-		// ((Player)player1).score++;
-		// resetPosition();
-		// }
-		// if (ball.getXPos() <= 100 && ball.getXPos() >= 0 && ball.getYPos() >= 323) {
-		// 	((Player) player2).score++;
-		// 	resetPosition();
-		// }
+		if(rectangleCircleCollision(ball.collisionArea, goal1)){
+			((Player)player2).score++;
+			resetPosition();
+		}
+		if (rectangleCircleCollision(ball.collisionArea, goal2)) {
+			((Player) player1).score++;
+			resetPosition();
+		}
 		if(rectangleCircleCollision(collisionArea,goalCrossBar1)||rectangleCircleCollision(collisionArea,goalCrossBar2)){
 		}
 		if (isCircleCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {

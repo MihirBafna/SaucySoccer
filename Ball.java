@@ -60,9 +60,9 @@ public class Ball extends GameObject{
         }
         if (isCircleCollision(ball, player1)) {
             if(player1.getCenterX()<= ball.getCenterX()){
-                setXVel(10);
+                setXVel(12);
             }else if(player1.getCenterX()>=ball.getCenterX()){
-                setXVel(-10);
+                setXVel(-12);
             }
             if (player1.getCenterY() <= ball.getCenterY() && Math.abs(gameObjects.get("player1").getYVel()) > 0) {
                 setYVel(10);

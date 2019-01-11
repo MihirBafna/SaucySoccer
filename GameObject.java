@@ -34,8 +34,8 @@ public abstract class GameObject{
     // protected fields //
     protected static Rectangle goalCrossBar1 = new Rectangle(0, 345, 105, 3);
     protected static Rectangle goalCrossBar2 = new Rectangle(898,345, 102, 3);
-    protected static Rectangle goal1 = new Rectangle(0, 341, 95, 80);
-    protected static Rectangle goal2 = new Rectangle(898, 345, 102, 3);
+    protected static Rectangle goal1 = new Rectangle(0, 351, 75, 130);
+    protected static Rectangle goal2 = new Rectangle(915, 351, 75, 125);
     protected static HashMap<String, GameObject> gameObjects = new HashMap<String, GameObject>(3);
     protected Circle collisionArea; // this circle will be used for collision detection
     protected double sumOfRadii;
