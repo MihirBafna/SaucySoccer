@@ -44,24 +44,24 @@ public class Player extends GameObject {
 			setYVel(-jumpspeed);
 			jump = false;
 		}
-		if (leftSlide) {
+		if (leftSlide) {	// if player is moving to the left
 			setXVel(-8);
-		} else if (rightSlide) {
+		} else if (rightSlide) { // if player is moving to the right
 			setXVel(8);
 		} else {
-			setXVel(0);
+			setXVel(0); // if player is not moving
 		}
-		if(rectangleCircleCollision(ball.collisionArea, goal1)){
+		if(rectangleCircleCollision(ball.collisionArea, goal1)){ // if player 2 scored a goal
 			((Player)player2).score++;
 			resetPosition();
 		}
-		if (rectangleCircleCollision(ball.collisionArea, goal2)) {
+		if (rectangleCircleCollision(ball.collisionArea, goal2)) { // if player 1 scored a goal
 			((Player) player1).score++;
 			resetPosition();
 		}
-		if(rectangleCircleCollision(collisionArea,goalCrossBar1)||rectangleCircleCollision(collisionArea,goalCrossBar2)){
-		}
 		if (isCircleCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {
+			gameObjects.get("player1").setXVel(-gameObjects.get("player1").getXVel());
+			gameObjects.get("player2").setXVel(0);
 		}
 		if (powerLevel <= 500) {
 			this.powerLevel++;
