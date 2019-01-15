@@ -65,10 +65,18 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		JLabel background = new JLabel(new ImageIcon("images/nightbackground.png"));
 		JLabel title = new JLabel(new ImageIcon("images/saucysoccerlogo.png"));
 		JButton playbutton = new JButton();
+		JButton controlsbutton = new JButton();
+		JButton settingsbutton = new JButton();
 		playbutton.setIcon(new ImageIcon("images/playbutton.png"));
+		controlsbutton.setIcon(new ImageIcon("images/controlsbutton.png"));
+		settingsbutton.setIcon(new ImageIcon("images/settingsbutton.png"));
 		title.setBounds(screenwidth/2-200,20,400,200);
 		background.setBounds(0,0,screenwidth, screenheight);
-		playbutton.setBounds(screenwidth / 2 -80, 260, 160, 80);
+		playbutton.setBounds(screenwidth / 2 -80, 240, 160, 80);
+		controlsbutton.setBounds(screenwidth / 2 - 80, 340, 160, 80);
+		settingsbutton.setBounds(screenwidth / 2 - 80, 440, 160, 80);
+		menu.add(controlsbutton);
+		menu.add(settingsbutton);
 		menu.add(playbutton);
 		menu.add(title);
 		menu.add(background);
@@ -139,8 +147,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		timer.start();
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
-		SoundEffect.synthybeat.setRepeat(true);
-		SoundEffect.synthybeat.play();
+		// SoundEffect.synthybeat.setRepeat(true);
+		// SoundEffect.synthybeat.play();
 	}
 
 
