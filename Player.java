@@ -146,6 +146,7 @@ public class Player extends GameObject {
 			((Player) gameObjects.get("player2")).setPowerLevel(0);
 			((Player) gameObjects.get("player2")).setUsingPower(false);
 		}
+		SoundEffect.powerup.play();
 	}
 
 	public void setUsingPower(boolean usingPower) {
