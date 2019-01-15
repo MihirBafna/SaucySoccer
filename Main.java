@@ -49,7 +49,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject weapon1down;
 	private static enum State{
 		MENU,
-		GAME
+		GAME,
+		SETTINGS
 	}; 
 	private static State state = State.MENU;
 
@@ -64,7 +65,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	public Main() {
 		menu = new JFrame();
-		JLabel background = new JLabel(new ImageIcon("images/nightbackground.png"));
+		JLabel background = new JLabel(new ImageIcon("images/nightbackground.png")); 	// image from https://www.vectorstock.com/royalty-free-vector/cartoon-game-background-vector-7926680
 		JLabel title = new JLabel(new ImageIcon("images/saucysoccerlogo.png"));
 		JButton playbutton = new JButton();
 		JButton controlsbutton = new JButton();
@@ -211,6 +212,14 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			}
 		}
 	}
+	
+	public void openLink(String url) {
+		try {
+			Desktop.getDesktop().browse(new URL(url).toURI());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 
 	@Override
@@ -294,13 +303,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		}
 	}
 
-	public void openLink(String url){
-		try {
-			Desktop.getDesktop().browse(new URL(url).toURI());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	// unused override methods
 	@Override
