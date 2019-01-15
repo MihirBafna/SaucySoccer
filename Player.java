@@ -5,8 +5,8 @@ public class Player extends GameObject {
 	private int score;
 	private int powerLevel;
 	private boolean usingPower = false;
-	private ImageIcon poweredplayer1 = new ImageIcon("images/player1powered.gif");
-	private ImageIcon poweredplayer2 = new ImageIcon("images/player1powered.gif");
+	private ImageIcon poweredplayer1 = new ImageIcon("images/BallCharacterRedFire.gif");
+	private ImageIcon poweredplayer2 = new ImageIcon("images/BallCharacterBlueFire.gif");
 	private GameObject ball ;
 	private GameObject player1;
 	private GameObject player2;
