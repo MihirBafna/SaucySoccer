@@ -7,6 +7,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -16,6 +17,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	public int screenheight = 600;
 	public Timer timer;
 	private JFrame screen;
+	private JFrame menu;
 	private JLabel field;
 	private JLabel goal1;
 	private JLabel goal2;
@@ -42,17 +44,57 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject player1;
 	private GameObject player2;
 	private GameObject weapon1up;
-  	private GameObject weapon1down;
+	private GameObject weapon1down;
+	private static enum State{
+		MENU,
+		GAME
+	}; 
+	private static State state = State.MENU;
 
+	
 	// ------------------------------------- Method Definitions -------------------------------------------//
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
-		Main main = new Main();
+		if(state == State.MENU){
+			Main main = new Main();
+		}
 	}
 
 	public Main() {
+		menu = new JFrame();
+		JLabel background = new JLabel(new ImageIcon("images/nightbackground.png"));
+		JLabel title = new JLabel(new ImageIcon("images/saucysoccerlogo.png"));
+		JButton playbutton = new JButton();
+		playbutton.setIcon(new ImageIcon("images/playbutton.png"));
+		title.setBounds(screenwidth/2-200,20,400,200);
+		background.setBounds(0,0,screenwidth, screenheight);
+		playbutton.setBounds(screenwidth / 2 -80, 260, 160, 80);
+		menu.add(playbutton);
+		menu.add(title);
+		menu.add(background);
+		menu.pack();
+		menu.setSize(screenwidth, screenheight);
+		menu.setTitle("Saucy Soccer");
+		menu.setResizable(false);
+		menu.setLocationByPlatform(true);
+		menu.setLayout(null);
+		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		menu.setVisible(true);
+		playbutton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				menu.setVisible(false);
+				menu.dispose();
+				state = State.GAME;
+				startGame();
+			}
+		});
+
+	}
+
+	public void startGame() {
 		screen = new JFrame();
-		field = new JLabel(new ImageIcon("images/field.png"));
+		field = new JLabel(new ImageIcon("images/nightbackground.png"));
 		goal1 = new JLabel(new ImageIcon("images/goal1.png"));
 		goal2 = new JLabel(new ImageIcon("images/goal2.png"));
 		powerbar1 = new JLabel(powerbarLabel1);
@@ -63,11 +105,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		goal1.setBounds(0, 345, 100, 125);
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
-		scoreDisplay.setBounds(screenwidth/2 - 15, 50, 50, 50);
-		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
+		scoreDisplay.setBounds(screenwidth / 2 - 15, 50, 50, 50);
+		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
+				"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
-		weapon1up = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50, 420, 50, "weapon1up", 1,true);
+		weapon1up = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50, 420, 50, "weapon1up", 1, true);
 		weapon1down = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50, 420, 50, "weapon1down", 1, false);
 		screen.add(powerbar1);
 		screen.add(powerbar2);
@@ -82,7 +125,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
 		screen.setTitle("Saucy Soccer");
-		screen.setResizable(true);
+		screen.setResizable(false);
 		screen.setLayout(null);
 		soccerball.init();
 		player1.init();
@@ -100,17 +143,20 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		SoundEffect.synthybeat.play();
 	}
 
+
 	public void loop() {
-		soccerball.events();
-		player1.events();
-		player2.events();
-		weapon1up.events();
-		weapon1down.events();
-		soccerball.updatePos();
-		player1.updatePos();
-		player2.updatePos();
-		displayScores();
-		displayPowerBars();
+		if(state == State.GAME){
+			soccerball.events();
+			player1.events();
+			player2.events();
+			weapon1up.events();
+			weapon1down.events();
+			soccerball.updatePos();
+			player1.updatePos();
+			player2.updatePos();
+			displayScores();
+			displayPowerBars();
+		}
 	}
 
 	public boolean won() {
@@ -145,6 +191,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			}
 		}
 	}
+
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
