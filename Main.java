@@ -158,7 +158,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			((Weapon) weapon1up).setWeaponSwing(true);
 		}
 		if(e.getKeyCode() == 71) {
-			((Weapon) weapon1down).setWeaponSwing(true);
 		}
 		if (e.getKeyCode() == 87) { // up
 			player1.setJump(true);
@@ -172,6 +171,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			player1.setRightSlide(true);
 		}
 		if (e.getKeyCode() == 32) { // spacebar
+			((Weapon) weapon1down).setWeaponSwing(true);
 			player1.setKick(true);
 		}
 		// player 2 key events
@@ -198,7 +198,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			((Weapon) weapon1up).setWeaponSwing(false);
 		}
 		if (e.getKeyCode() == 71) {
-			((Weapon) weapon1down).setWeaponSwing(false);
 		}
 		if (e.getKeyCode() == 65) { // left
 			player1.setLeftSlide(false);
@@ -207,6 +206,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			player1.setRightSlide(false);
 		}
 		if (e.getKeyCode() == 32) { // spacebar
+			((Weapon) weapon1down).setWeaponSwing(false);
 			player1.setKick(false);
 		}
 		if (e.getKeyCode() == 69) { // e key

@@ -59,14 +59,28 @@ public class Player extends GameObject {
 			((Player) player1).score++;
 			resetPosition();
 		}
-		if (isCircleCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) {
-			gameObjects.get("player1").setXVel(-gameObjects.get("player1").getXVel());
-			gameObjects.get("player2").setXVel(0);
+		if (isCircleCollision(gameObjects.get("player1").collisionArea, gameObjects.get("player2").collisionArea)) { // if player 1 and player 2 collide
+			if(gameObjects.get("player1").getXVel()<0){
+				gameObjects.get("player1").changeXPos(10);
+				gameObjects.get("player1").setXVel(0);
+			}else if(gameObjects.get("player1").getXVel()>0){
+				gameObjects.get("player1").changeXPos(-10);
+				gameObjects.get("player1").setXVel(0);
+			}
+			if(gameObjects.get("player2").getXVel()<0){
+				gameObjects.get("player2").changeXPos(10);
+				gameObjects.get("player2").setXVel(0);
+			}else if(gameObjects.get("player2").getXVel()>0){
+				gameObjects.get("player2").changeXPos(-10);
+				gameObjects.get("player2").setXVel(0);
+			}
 		}
-		if (powerLevel <= 500) {
+
+		if (powerLevel <= 500) {	// incrementing power level until reaches 500
 			this.powerLevel++;
 		}
-		if (((Player) gameObjects.get("player1")).hasPower()) {
+
+		if (((Player) gameObjects.get("player1")).hasPower()) { 	// checking if player 1 has power and applying power if it is touching the ball
 			if (((Player) gameObjects.get("player1")).usingPower) {
 				((Player) gameObjects.get("player1")).getLabel().setIcon(poweredplayer1);
 				if (isCircleCollision(gameObjects.get("player1").collisionArea,
@@ -75,9 +89,9 @@ public class Player extends GameObject {
 				}
 			}
 		} else {
-			gameObjects.get("player1").getLabel().setIcon(gameObjects.get("player1").getImg());
+			gameObjects.get("player1").getLabel().setIcon(gameObjects.get("player1").getImg()); //setting player 1 power image
 		}
-		if (((Player) gameObjects.get("player2")).hasPower()) {
+		if (((Player) gameObjects.get("player2")).hasPower()) {	// checking if player 2 has power and applying power if it is touching the ball
 			if (((Player) gameObjects.get("player2")).usingPower) {
 				((Player) gameObjects.get("player2")).getLabel().setIcon(poweredplayer2);
 				if (isCircleCollision(gameObjects.get("player2").collisionArea,

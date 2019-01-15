@@ -27,7 +27,7 @@ public class Weapon extends GameObject {
 	public void updatePos() {
 		if (up) {
 			rotations++;
-			d += 2.5;
+			d += 5.5;
 			deltaX = getXPos() - (attached.getXPos() + attached.getSize() / 2);
 			deltaY = getYPos() - (attached.getYPos() + attached.getSize() / 2);
 			// radius = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
@@ -47,7 +47,7 @@ public class Weapon extends GameObject {
 		}
 		if (!up) {
 			rotations++;
-			d -= 2.5;
+			d -= 5.5;
 			deltaX = getXPos() - (attached.getXPos() + attached.getSize() / 2);
 			deltaY = getYPos() + (attached.getYPos() + attached.getSize() / 2);
 			// radius = Math.sqrt(deltaX*deltaX+deltaY*deltaY);
