@@ -1,3 +1,4 @@
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -5,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.net.URL;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -67,6 +69,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		JButton playbutton = new JButton();
 		JButton controlsbutton = new JButton();
 		JButton settingsbutton = new JButton();
+		JButton forkbutton = new JButton();
+		forkbutton.setIcon(new ImageIcon("images/githublogo.png"));
 		playbutton.setIcon(new ImageIcon("images/playbutton.png"));
 		controlsbutton.setIcon(new ImageIcon("images/controlsbutton.png"));
 		settingsbutton.setIcon(new ImageIcon("images/settingsbutton.png"));
@@ -75,6 +79,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		playbutton.setBounds(screenwidth / 2 -80, 240, 160, 80);
 		controlsbutton.setBounds(screenwidth / 2 - 80, 340, 160, 80);
 		settingsbutton.setBounds(screenwidth / 2 - 80, 440, 160, 80);
+		forkbutton.setBounds(20,520,40,40);
+		menu.add(forkbutton);
 		menu.add(controlsbutton);
 		menu.add(settingsbutton);
 		menu.add(playbutton);
@@ -88,6 +94,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		menu.setLayout(null);
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		menu.setVisible(true);
+		forkbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				openLink("https://github.com/MihirBafna/SaucySoccer");
+			}
+		});
 		playbutton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -147,8 +159,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		timer.start();
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
-		// SoundEffect.synthybeat.setRepeat(true);
-		// SoundEffect.synthybeat.play();
+		SoundEffect.synthybeat.setRepeat(true);
+		SoundEffect.synthybeat.play();
 	}
 
 
@@ -279,6 +291,14 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		}
 		if (e.getKeyCode() == 80) { // e key
 			((Player) player2).setUsingPower(true);
+		}
+	}
+
+	public void openLink(String url){
+		try {
+			Desktop.getDesktop().browse(new URL(url).toURI());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
