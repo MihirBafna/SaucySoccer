@@ -49,6 +49,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject weapon1down;
 	private GameObject weapon2up;
 	private GameObject weapon2down;
+	private int whichSong = 1; // 1 for synthy, 2 for icy, 3 for chimes
 
 	private static enum State{
 		MENU,
@@ -70,14 +71,27 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		menu = new JFrame();
 		JLabel background = new JLabel(new ImageIcon("images/nightbackground.png")); 	// image from https://www.vectorstock.com/royalty-free-vector/cartoon-game-background-vector-7926680
 		JLabel title = new JLabel(new ImageIcon("images/saucysoccerlogo.png"));
+		JLabel music = new JLabel(new ImageIcon("images/saucymusic.png"));
 		JLabel controls = new JLabel(new ImageIcon("images/controls.png"));
+		JLabel settings = new JLabel(new ImageIcon("images/settings.png"));
 		JButton playbutton = new JButton();
 		JButton controlsbutton = new JButton();
 		JButton settingsbutton = new JButton();
 		JButton forkbutton = new JButton();
 		JButton backbutton = new JButton();
+		JButton music1 = new JButton("synthy beat");
+		JButton music2 = new JButton("icy synth");
+		JButton music3 = new JButton("chimes beat");
 		backbutton.setVisible(false);
 		controls.setVisible(false);
+		settings.setVisible(false);
+		music.setVisible(false);
+		music1.setVisible(false);
+		music2.setVisible(false);
+		music3.setVisible(false);
+		// music1.setIcon(new ImageIcon("synthy beat"));
+		// music2.setIcon(new ImageIcon("icy synth"));
+		// music3.setIcon(new ImageIcon("chimes beat"));
 		backbutton.setIcon(new ImageIcon("images/backbutton.png"));
 		forkbutton.setIcon(new ImageIcon("images/githublogo.png"));
 		playbutton.setIcon(new ImageIcon("images/playbutton.png"));
@@ -90,9 +104,19 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		settingsbutton.setBounds(screenwidth / 2 - 80, 440, 160, 80);
 		forkbutton.setBounds(20,520,40,40);
 		controls.setBounds(0,0,screenwidth,screenheight);
+		settings.setBounds(0,0,screenwidth,screenheight);
 		backbutton.setBounds(10, 10, 60, 60);
+		music.setBounds(screenwidth/2-200,20,400,230);
+		music1.setBounds(screenwidth/2-80,250,160,50);
+		music2.setBounds(screenwidth / 2 - 80, 320, 160, 50);
+		music3.setBounds(screenwidth / 2 - 80, 390, 160, 50);
+		menu.add(music);
+		menu.add(music1);
+		menu.add(music2);
+		menu.add(music3);
 		menu.add(backbutton);
 		menu.add(controls);
+		menu.add(settings);
 		menu.add(forkbutton);
 		menu.add(controlsbutton);
 		menu.add(settingsbutton);
@@ -125,6 +149,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		controlsbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				playbutton.setVisible(false);
+				forkbutton.setVisible(false);
+				settingsbutton.setVisible(false);
 				controls.setVisible(true);
 				backbutton.setVisible(true);
 
@@ -135,6 +162,49 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			public void actionPerformed(ActionEvent e) {
 				controls.setVisible(false);
 				backbutton.setVisible(false);
+				settings.setVisible(false);
+				music1.setVisible(false);
+				music2.setVisible(false);
+				music3.setVisible(false);
+				music.setVisible(false);
+				playbutton.setVisible(true);
+				forkbutton.setVisible(true);
+				controlsbutton.setVisible(true);
+				settingsbutton.setVisible(true);
+			}
+		});
+		settingsbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controls.setVisible(false);
+				backbutton.setVisible(true);
+				playbutton.setVisible(false);
+				forkbutton.setVisible(false);
+				settingsbutton.setVisible(false);
+				controlsbutton.setVisible(false);
+				music.setVisible(true);
+				settings.setVisible(true);
+				music1.setVisible(true);
+				music2.setVisible(true);
+				music3.setVisible(true);
+			}
+		});
+		music1.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				whichSong = 1;
+			}
+		});
+		music2.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				whichSong = 2;
+			}
+		});
+		music3.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				whichSong = 3;
 			}
 		});
 
@@ -158,10 +228,10 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 				"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 150, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 800, 420, 50, "player2");
-		weapon1up = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50, 420, 50, "weapon1up", 1, true);
-		weapon1down = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50, 420, 50, "weapon1down", 1, false);
-		weapon2down = new Weapon(new ImageIcon("images/TrainingStickP2Down.png"), 900, 420, 50, "weapon2down", 2,false);
-		weapon2up = new Weapon(new ImageIcon("images/TrainingStickP2Up.png"), 900, 420, 50, "weapon2up", 2, true);
+		weapon1up = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 150, 420, 50, "weapon1up", 1, true);
+		weapon1down = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 150, 420, 50, "weapon1down", 1, false);
+		weapon2down = new Weapon(new ImageIcon("images/TrainingStickP2Down.png"), 800, 420, 50, "weapon2down", 2,false);
+		weapon2up = new Weapon(new ImageIcon("images/TrainingStickP2Up.png"), 800, 420, 50, "weapon2up", 2, true);
 		screen.add(powerbar1);
 		screen.add(powerbar2);
 		screen.add(goal1);
@@ -193,8 +263,16 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		timer.start();
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setVisible(true);
-		SoundEffect.synthybeat.setRepeat(true);
-		SoundEffect.synthybeat.play();
+		if(whichSong == 1){
+			SoundEffect.synthybeat.setRepeat(true);
+			SoundEffect.synthybeat.play();
+		}else if (whichSong == 2){
+			SoundEffect.icysynth.setRepeat(true);
+			SoundEffect.icysynth.play();
+		}else if(whichSong == 3){
+			SoundEffect.chimesbeattrap.setRepeat(true);
+			SoundEffect.chimesbeattrap.play();
+		}
 	}
 
 

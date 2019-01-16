@@ -1,3 +1,5 @@
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 public class Weapon extends GameObject {
@@ -17,11 +19,14 @@ public class Weapon extends GameObject {
 	private double d = 0;
 	private boolean weaponSwing = false;
 	private boolean up;
+	private Rectangle collisionArea;
 
 	public Weapon(ImageIcon img, int x, int y, int size, String key,int whichPlayer, boolean isUp) {
 		super(img, x, y, size, key);
 		this.whichPlayer = whichPlayer;
 		this.up = isUp;
+		collisionArea = new Rectangle(x, y, 7, size);
+
 	}
 
 	public void updatePos() {
@@ -42,6 +47,7 @@ public class Weapon extends GameObject {
 				aY = attached.getYPos() + newDeltaY * radius / newLength;
 				setXPos((int) aX);
 				setYPos((int) aY);
+				collisionArea.setLocation((int)aX, (int)aY);
 				if (rotations < 35) {
 					rotate(0.08 * rotations);
 				}
@@ -143,6 +149,12 @@ public class Weapon extends GameObject {
 		} else if (whichPlayer == 2) {
 			attached = gameObjects.get("player2");
 		}
+	}
+
+	public void rotateCollisionArea(double theta){
+		rotations++;
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.rotate(theta);
 	}
 
 	public void setWeaponSwing(boolean a) {
