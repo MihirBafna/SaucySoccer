@@ -23,12 +23,7 @@ public class Ball extends GameObject{
         player2 = gameObjects.get("player2").collisionArea;
         rotatecounter = (rotatecounter+1)%3;
         if(rotatecounter == 0){
-            if (getXVel()<0) {
-                rotate(-14.0);
-            }
-            else if(getXVel() > 0) {
-                rotate(14.0);
-            }
+        	rotate(getXVel() * 2);
         }
         if (getYPos() <= ground) changeYVel(gravity*dt);
         if (getYPos() + getYVel() >= ground) {

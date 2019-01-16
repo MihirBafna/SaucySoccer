@@ -10,6 +10,8 @@ public class SoundEffect {
 	public static final SoundEffect icysynth = new SoundEffect("music/icysynthbeat.wav");
 	public static final SoundEffect chimesbeattrap = new SoundEffect("music/chimesbeattrap.wav");
 	public static final SoundEffect powerup = new SoundEffect("music/powerup1.wav");
+	public static final SoundEffect fireball = new SoundEffect("music/fireball.wav");
+
 	
 	public static enum Volume {
 		MUTE, LOW, MEDIUM, HIGH

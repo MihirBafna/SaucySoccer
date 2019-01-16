@@ -152,6 +152,7 @@ public class Player extends GameObject {
 	public void setUsingPower(boolean usingPower) {
 		if(this.hasPower() && usingPower) {
 			this.usingPower = usingPower;
+			SoundEffect.fireball.play();
 		}
 		this.usingPower = usingPower;
 	}
