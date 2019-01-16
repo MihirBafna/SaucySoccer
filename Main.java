@@ -47,6 +47,9 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 	private GameObject player2;
 	private GameObject weapon1up;
 	private GameObject weapon1down;
+	private GameObject weapon2up;
+	private GameObject weapon2down;
+
 	private static enum State{
 		MENU,
 		GAME,
@@ -133,6 +136,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
 		weapon1up = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50, 420, 50, "weapon1up", 1, true);
 		weapon1down = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50, 420, 50, "weapon1down", 1, false);
+		weapon2down = new Weapon(new ImageIcon("images/TrainingStickP2Down.png"), 900, 420, 50, "weapon2down", 2,false);
+		weapon2up = new Weapon(new ImageIcon("images/TrainingStickP2Up.png"), 900, 420, 50, "weapon2up", 2, true);
 		screen.add(powerbar1);
 		screen.add(powerbar2);
 		screen.add(goal1);
@@ -142,6 +147,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		screen.add(player2.getLabel());
 		screen.add(weapon1up.getLabel());
 		screen.add(weapon1down.getLabel());
+		screen.add(weapon2down.getLabel());
+		screen.add(weapon2up.getLabel());
 		screen.add(scoreDisplay);
 		screen.add(field);
 		screen.setSize(screenwidth, screenheight);
@@ -153,6 +160,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		player2.init();
 		weapon1up.init();
 		weapon1down.init();
+		weapon2down.init();
+		weapon2up.init();
 		displayScores();
 		screen.addKeyListener(this);
 		screen.addMouseMotionListener(this);
@@ -172,6 +181,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			player2.events();
 			weapon1up.events();
 			weapon1down.events();
+			weapon2down.events();
+			weapon2up.events();
 			soccerball.updatePos();
 			player1.updatePos();
 			player2.updatePos();
@@ -229,6 +240,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	@Override
 	public void keyPressed(KeyEvent e) {
+		System.out.println(e.getKeyCode());
 		// player 1 key events
     	if(e.getKeyCode() == 70) {
 			((Weapon) weapon1up).setWeaponSwing(true);
@@ -251,6 +263,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			player1.setKick(true);
 		}
 		// player 2 key events
+		if (e.getKeyCode() == 16) {
+			((Weapon) weapon2up).setWeaponSwing(true);
+		}
+		if (e.getKeyCode() == 18) {
+			((Weapon) weapon2down).setWeaponSwing(true);
+		}
 		if (e.getKeyCode() == 38) { // up
 			player2.setJump(true);
 		}
@@ -289,6 +307,12 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 			((Player) player1).setUsingPower(true);
 		}
 		// player 2 key events
+		if (e.getKeyCode() == 16) {
+			((Weapon) weapon2up).setWeaponSwing(false);
+		}
+		if (e.getKeyCode() == 18) {
+			((Weapon) weapon2down).setWeaponSwing(false);
+		}
 		if (e.getKeyCode() == 37) { // left
 			player2.setLeftSlide(false);
 		}
