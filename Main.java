@@ -3,9 +3,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
 import java.net.URL;
 import javax.swing.Timer;
 import javax.swing.ImageIcon;
@@ -13,7 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class Main implements ActionListener, KeyListener, MouseListener, MouseMotionListener {
+public class Main implements ActionListener, KeyListener{
 	// Main class fields
 	public int screenwidth = 1000;
 	public int screenheight = 600;
@@ -89,10 +86,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		music1.setVisible(false);
 		music2.setVisible(false);
 		music3.setVisible(false);
-		// music1.setIcon(new ImageIcon("synthy beat"));
-		// music2.setIcon(new ImageIcon("icy synth"));
-		// music3.setIcon(new ImageIcon("chimes beat"));
-		backbutton.setIcon(new ImageIcon("images/backbutton.png"));
+		backbutton.setIcon(new ImageIcon("images/backbutton1.png"));
 		forkbutton.setIcon(new ImageIcon("images/githublogo.png"));
 		playbutton.setIcon(new ImageIcon("images/playbutton.png"));
 		controlsbutton.setIcon(new ImageIcon("images/controlsbutton.png"));
@@ -102,7 +96,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		playbutton.setBounds(screenwidth / 2 -80, 240, 160, 80);
 		controlsbutton.setBounds(screenwidth / 2 - 80, 340, 160, 80);
 		settingsbutton.setBounds(screenwidth / 2 - 80, 440, 160, 80);
-		forkbutton.setBounds(20,520,40,40);
+		forkbutton.setBounds(950,10,40,40);
 		controls.setBounds(0,0,screenwidth,screenheight);
 		settings.setBounds(0,0,screenwidth,screenheight);
 		backbutton.setBounds(10, 10, 60, 60);
@@ -110,6 +104,16 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		music1.setBounds(screenwidth/2-80,250,160,50);
 		music2.setBounds(screenwidth / 2 - 80, 320, 160, 50);
 		music3.setBounds(screenwidth / 2 - 80, 390, 160, 50);
+		playbutton.setOpaque(false);
+		playbutton.setBorderPainted(false);
+		backbutton.setOpaque(false);
+		backbutton.setBorderPainted(false);
+		forkbutton.setOpaque(false);
+		forkbutton.setBorderPainted(false);
+		settingsbutton.setOpaque(false);
+		settingsbutton.setBorderPainted(false);
+		controlsbutton.setOpaque(false);
+		controlsbutton.setBorderPainted(false);
 		menu.add(music);
 		menu.add(music1);
 		menu.add(music2);
@@ -258,7 +262,6 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		weapon2up.init();
 		displayScores();
 		screen.addKeyListener(this);
-		screen.addMouseMotionListener(this);
 		timer = new Timer(1000 / 60, this);
 		timer.start();
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -436,34 +439,5 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-
-	}
-
-	@Override
-	public void mouseDragged(MouseEvent arg0) {
-
-	}
-
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-	}
 }
