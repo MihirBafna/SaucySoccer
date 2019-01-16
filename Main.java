@@ -70,10 +70,15 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		menu = new JFrame();
 		JLabel background = new JLabel(new ImageIcon("images/nightbackground.png")); 	// image from https://www.vectorstock.com/royalty-free-vector/cartoon-game-background-vector-7926680
 		JLabel title = new JLabel(new ImageIcon("images/saucysoccerlogo.png"));
+		JLabel controls = new JLabel(new ImageIcon("images/controls.png"));
 		JButton playbutton = new JButton();
 		JButton controlsbutton = new JButton();
 		JButton settingsbutton = new JButton();
 		JButton forkbutton = new JButton();
+		JButton backbutton = new JButton();
+		backbutton.setVisible(false);
+		controls.setVisible(false);
+		backbutton.setIcon(new ImageIcon("images/backbutton.png"));
 		forkbutton.setIcon(new ImageIcon("images/githublogo.png"));
 		playbutton.setIcon(new ImageIcon("images/playbutton.png"));
 		controlsbutton.setIcon(new ImageIcon("images/controlsbutton.png"));
@@ -84,6 +89,10 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		controlsbutton.setBounds(screenwidth / 2 - 80, 340, 160, 80);
 		settingsbutton.setBounds(screenwidth / 2 - 80, 440, 160, 80);
 		forkbutton.setBounds(20,520,40,40);
+		controls.setBounds(0,0,screenwidth,screenheight);
+		backbutton.setBounds(10, 10, 60, 60);
+		menu.add(backbutton);
+		menu.add(controls);
 		menu.add(forkbutton);
 		menu.add(controlsbutton);
 		menu.add(settingsbutton);
@@ -97,7 +106,7 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		menu.setLocationByPlatform(true);
 		menu.setLayout(null);
 		menu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		menu.setVisible(true);
+		menu.setVisible(true);		
 		forkbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -111,6 +120,21 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 				menu.dispose();
 				state = State.GAME;
 				startGame();
+			}
+		});
+		controlsbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controls.setVisible(true);
+				backbutton.setVisible(true);
+
+			}
+		});
+		backbutton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controls.setVisible(false);
+				backbutton.setVisible(false);
 			}
 		});
 
@@ -132,8 +156,8 @@ public class Main implements ActionListener, KeyListener, MouseListener, MouseMo
 		scoreDisplay.setBounds(screenwidth / 2 - 15, 50, 50, 50);
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
 				"ball");
-		player1 = new Player(new ImageIcon("images/redBallChar.png"), 50, 420, 50, "player1");
-		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 900, 420, 50, "player2");
+		player1 = new Player(new ImageIcon("images/redBallChar.png"), 150, 420, 50, "player1");
+		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 800, 420, 50, "player2");
 		weapon1up = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 50, 420, 50, "weapon1up", 1, true);
 		weapon1down = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 50, 420, 50, "weapon1down", 1, false);
 		weapon2down = new Weapon(new ImageIcon("images/TrainingStickP2Down.png"), 900, 420, 50, "weapon2down", 2,false);
