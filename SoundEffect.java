@@ -8,6 +8,8 @@ public class SoundEffect {
 	private boolean repeat;
 	public static final SoundEffect synthybeat = new SoundEffect("music/synthygamebeat.wav");
 	public static final SoundEffect powerup = new SoundEffect("music/powerup1.wav");
+	public static final SoundEffect fireball = new SoundEffect("music/fireball.wav");
+
 	
 	public static enum Volume {
 		MUTE, LOW, MEDIUM, HIGH
