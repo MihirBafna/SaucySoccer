@@ -105,13 +105,18 @@ public class Main implements ActionListener, KeyListener{
 		music2.setBounds(screenwidth / 2 - 80, 320, 160, 50);
 		music3.setBounds(screenwidth / 2 - 80, 390, 160, 50);
 		playbutton.setOpaque(false);
+		playbutton.setContentAreaFilled(false);
 		playbutton.setBorderPainted(false);
 		backbutton.setOpaque(false);
+		backbutton.setContentAreaFilled(false);
 		backbutton.setBorderPainted(false);
+		forkbutton.setContentAreaFilled(false);
 		forkbutton.setOpaque(false);
 		forkbutton.setBorderPainted(false);
+		settingsbutton.setContentAreaFilled(false);
 		settingsbutton.setOpaque(false);
 		settingsbutton.setBorderPainted(false);
+		controlsbutton.setContentAreaFilled(false);
 		controlsbutton.setOpaque(false);
 		controlsbutton.setBorderPainted(false);
 		menu.add(music);
