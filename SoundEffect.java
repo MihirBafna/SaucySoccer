@@ -11,6 +11,7 @@ public class SoundEffect {
 	public static final SoundEffect chimesbeattrap = new SoundEffect("music/chimesbeattrap.wav");
 	public static final SoundEffect powerup = new SoundEffect("music/powerup1.wav");
 	public static final SoundEffect fireball = new SoundEffect("music/fireball.wav");
+	public static final SoundEffect buttonclick = new SoundEffect("music/buttonclick.wav");
 
 	
 	public static enum Volume {

@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +39,7 @@ public class Main implements ActionListener, KeyListener{
 	private int counter1 = 0;
 	private int counter2 = 0;
 	private JLabel scoreDisplay;
+	private JLabel wonDisplay;
 	private String scores;
 	private GameObject soccerball;
 	private GameObject player1;
@@ -46,12 +48,12 @@ public class Main implements ActionListener, KeyListener{
 	private GameObject weapon1down;
 	private GameObject weapon2up;
 	private GameObject weapon2down;
-	private int whichSong = 1; // 1 for synthy, 2 for icy, 3 for chimes
+	private int whichSong = 2; // 1 for synthy, 2 for icy, 3 for chimes
 
 	private static enum State{
 		MENU,
 		GAME,
-		SETTINGS
+		WON
 	}; 
 	private static State state = State.MENU;
 
@@ -143,12 +145,14 @@ public class Main implements ActionListener, KeyListener{
 		forkbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SoundEffect.buttonclick.play();
 				openLink("https://github.com/MihirBafna/SaucySoccer");
 			}
 		});
 		playbutton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SoundEffect.buttonclick.play();
 				menu.setVisible(false);
 				menu.dispose();
 				state = State.GAME;
@@ -158,6 +162,7 @@ public class Main implements ActionListener, KeyListener{
 		controlsbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SoundEffect.buttonclick.play();
 				playbutton.setVisible(false);
 				forkbutton.setVisible(false);
 				settingsbutton.setVisible(false);
@@ -169,6 +174,7 @@ public class Main implements ActionListener, KeyListener{
 		backbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SoundEffect.buttonclick.play();
 				controls.setVisible(false);
 				backbutton.setVisible(false);
 				settings.setVisible(false);
@@ -185,6 +191,7 @@ public class Main implements ActionListener, KeyListener{
 		settingsbutton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SoundEffect.buttonclick.play();
 				controls.setVisible(false);
 				backbutton.setVisible(true);
 				playbutton.setVisible(false);
@@ -201,18 +208,21 @@ public class Main implements ActionListener, KeyListener{
 		music1.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e){
+				SoundEffect.buttonclick.play();
 				whichSong = 1;
 			}
 		});
 		music2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SoundEffect.buttonclick.play();
 				whichSong = 2;
 			}
 		});
 		music3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				SoundEffect.buttonclick.play();
 				whichSong = 3;
 			}
 		});
@@ -221,26 +231,31 @@ public class Main implements ActionListener, KeyListener{
 
 	public void startGame() {
 		screen = new JFrame();
+		JButton menubtn = new JButton();
 		field = new JLabel(new ImageIcon("images/nightbackground.png"));
 		goal1 = new JLabel(new ImageIcon("images/goal1.png"));
 		goal2 = new JLabel(new ImageIcon("images/goal2.png"));
 		powerbar1 = new JLabel(powerbarLabel1);
 		powerbar2 = new JLabel(powerbarLabel1);
 		scoreDisplay = new JLabel("");
+		wonDisplay = new JLabel("");
+		scoreDisplay.setForeground(Color.WHITE);
+		wonDisplay.setForeground(Color.WHITE);
 		powerbar1.setBounds(30, 10, 400, 100);
 		powerbar2.setBounds(560, 10, 400, 100);
 		goal1.setBounds(0, 345, 100, 125);
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
+		wonDisplay.setBounds(screenwidth/2 - 100, screenheight/2, 200,20);
 		scoreDisplay.setBounds(screenwidth / 2 - 15, 50, 50, 50);
-		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,
-				"ball");
+		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 150, 420, 50, "player1");
 		player2 = new Player(new ImageIcon("images/blueBallChar.png"), 800, 420, 50, "player2");
 		weapon1up = new Weapon(new ImageIcon("images/TrainingStickP1Up.png"), 150, 420, 50, "weapon1up", 1, true);
 		weapon1down = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 150, 420, 50, "weapon1down", 1, false);
 		weapon2down = new Weapon(new ImageIcon("images/TrainingStickP2Down.png"), 800, 420, 50, "weapon2down", 2,false);
 		weapon2up = new Weapon(new ImageIcon("images/TrainingStickP2Up.png"), 800, 420, 50, "weapon2up", 2, true);
+		screen.add(wonDisplay);
 		screen.add(powerbar1);
 		screen.add(powerbar2);
 		screen.add(goal1);
@@ -298,11 +313,18 @@ public class Main implements ActionListener, KeyListener{
 			player2.updatePos();
 			displayScores();
 			displayPowerBars();
+			playerWon();
 		}
 	}
 
-	public boolean won() {
-		return true;
+	public void playerWon() {
+		if(((Player)player1).getScore()/2 == 10){
+			state = State.WON;
+			wonDisplay.setText("Player 1 Wins !!!");
+		}else if (((Player)player2).getScore()/2 == 10){
+			state = State.WON;
+			wonDisplay.setText("Player 2 Wins !!!");
+		}
 	}
 
 	public void displayScores() {
@@ -350,7 +372,6 @@ public class Main implements ActionListener, KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		System.out.println(e.getKeyCode());
 		// player 1 key events
     	if(e.getKeyCode() == 70) {
 			((Weapon) weapon1up).setWeaponSwing(true);
