@@ -39,7 +39,8 @@ public class Main implements ActionListener, KeyListener{
 	private int counter1 = 0;
 	private int counter2 = 0;
 	private JLabel scoreDisplay;
-	private JLabel wonDisplay;
+	private JLabel player1wins;
+	private JLabel player2wins;
 	private String scores;
 	private GameObject soccerball;
 	private GameObject player1;
@@ -231,22 +232,24 @@ public class Main implements ActionListener, KeyListener{
 
 	public void startGame() {
 		screen = new JFrame();
-		JButton menubtn = new JButton();
 		field = new JLabel(new ImageIcon("images/nightbackground.png"));
 		goal1 = new JLabel(new ImageIcon("images/goal1.png"));
 		goal2 = new JLabel(new ImageIcon("images/goal2.png"));
 		powerbar1 = new JLabel(powerbarLabel1);
 		powerbar2 = new JLabel(powerbarLabel1);
 		scoreDisplay = new JLabel("");
-		wonDisplay = new JLabel("");
+		player1wins = new JLabel(new ImageIcon("images/player1.png"));
+		player2wins = new JLabel(new ImageIcon("images/player2.png"));
+		player1wins.setVisible(false);
+		player2wins.setVisible(false);
+		player1wins.setBounds(screenwidth/2-275,20,550,250);
+		player2wins.setBounds(screenwidth/2-275,20,550,250);
 		scoreDisplay.setForeground(Color.WHITE);
-		wonDisplay.setForeground(Color.WHITE);
 		powerbar1.setBounds(30, 10, 400, 100);
 		powerbar2.setBounds(560, 10, 400, 100);
 		goal1.setBounds(0, 345, 100, 125);
 		goal2.setBounds(900, 345, 100, 125);
 		field.setBounds(0, 0, screenwidth, screenheight);
-		wonDisplay.setBounds(screenwidth/2 - 100, screenheight/2, 200,20);
 		scoreDisplay.setBounds(screenwidth / 2 - 15, 50, 50, 50);
 		soccerball = new Ball(new ImageIcon("images/SoccerBall.png"), screenwidth / 2 - 21 / 2, 50 - 21 / 2, 21,"ball");
 		player1 = new Player(new ImageIcon("images/redBallChar.png"), 150, 420, 50, "player1");
@@ -255,7 +258,8 @@ public class Main implements ActionListener, KeyListener{
 		weapon1down = new Weapon(new ImageIcon("images/TrainingStickP1Down.png"), 150, 420, 50, "weapon1down", 1, false);
 		weapon2down = new Weapon(new ImageIcon("images/TrainingStickP2Down.png"), 800, 420, 50, "weapon2down", 2,false);
 		weapon2up = new Weapon(new ImageIcon("images/TrainingStickP2Up.png"), 800, 420, 50, "weapon2up", 2, true);
-		screen.add(wonDisplay);
+		screen.add(player1wins);
+		screen.add(player2wins);
 		screen.add(powerbar1);
 		screen.add(powerbar2);
 		screen.add(goal1);
@@ -320,10 +324,12 @@ public class Main implements ActionListener, KeyListener{
 	public void playerWon() {
 		if(((Player)player1).getScore()/2 == 10){
 			state = State.WON;
-			wonDisplay.setText("Player 1 Wins !!!");
+			player1wins.setVisible(true);
+			player2wins.setVisible(false);
 		}else if (((Player)player2).getScore()/2 == 10){
 			state = State.WON;
-			wonDisplay.setText("Player 2 Wins !!!");
+			player1wins.setVisible(false);
+			player2wins.setVisible(true);
 		}
 	}
 
